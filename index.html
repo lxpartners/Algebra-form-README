@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Documentação Técnica — Algebra Capital KYC</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0a0a0a;--dark:#111;--dark2:#1a1a1a;--border:#2a2a2a;--border2:#383838;--text:#fff;--text2:#c8c4be;--text3:#888480;--gold:#c9a96e;--gold2:#a8873a;--glow:rgba(201,169,110,0.08);--ok:#00d4aa;--err:#e05252;}
+html{font-size:14px}
+body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--text);font-weight:300;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.hdr{background:var(--dark);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:60px;flex-shrink:0}
+.hdr-left{display:flex;align-items:center;gap:20px}
+.logo-main{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;letter-spacing:6px;text-transform:uppercase}
+.logo-sub{font-size:7px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-top:2px}
+.hdr-divider{width:1px;height:28px;background:var(--border)}
+.hdr-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3)}
+.badge{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,169,110,0.3);padding:4px 12px}
+.hdr-back{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);text-decoration:none;border:1px solid var(--border);padding:5px 12px;transition:all .15s;display:flex;align-items:center;gap:6px}
+.hdr-back:hover{color:var(--gold);border-color:var(--gold)}
+.layout{display:flex;flex:1;overflow:hidden}
+.sidebar{width:230px;background:var(--dark);border-right:1px solid var(--border);padding:20px 0;flex-shrink:0;overflow-y:auto}
+.nav-group-label{padding:8px 20px 6px;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:6px}
+.nav-btn{width:100%;text-align:left;background:transparent;border:none;border-left:2px solid transparent;padding:9px 20px 9px 26px;cursor:pointer;font-size:10px;font-weight:400;letter-spacing:.5px;color:var(--text2);font-family:'Montserrat',sans-serif;transition:all .15s;display:block}
+.nav-btn:hover{color:var(--text)}
+.nav-btn.active{background:var(--glow);border-left-color:var(--gold);color:#fff;font-weight:500}
+.nav-sep{height:1px;background:var(--border);margin:8px 16px}
+.content{flex:1;padding:32px 40px;overflow-y:auto}
+.page{display:none}
+.page.active{display:block}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;letter-spacing:1px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.sec-title{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.body-text{font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:16px}
+.card{background:var(--dark2);border:1px solid var(--border);padding:4px 16px;margin-bottom:20px}
+.row{display:flex;gap:12px;padding:6px 0;border-bottom:1px solid var(--border);font-size:11px}
+.row:last-child{border-bottom:none}
+.row-lbl{width:200px;color:var(--text3);flex-shrink:0}
+.row-val{color:var(--text2)}
+.row-val code{color:var(--gold);font-family:monospace}
+.step-item{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--border)}
+.step-num{width:28px;height:28px;background:var(--black);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gold);flex-shrink:0;margin-top:2px}
+.step-title{font-size:11px;font-weight:600;color:#fff;margin-bottom:4px}
+.step-desc{font-size:11px;color:var(--text2);line-height:1.6}
+.step-tag{display:inline-block;font-size:8px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:2px 7px;margin-left:6px;vertical-align:middle}
+.tag-internal{background:rgba(106,191,106,0.12);color:#6abf6a;border:1px solid #2a5a2a}
+.tag-readonly{background:var(--glow);color:var(--gold);border:1px solid rgba(201,169,110,0.3)}
+.tag-client{background:rgba(0,212,170,0.08);color:var(--ok);border:1px solid rgba(0,212,170,0.2)}
+.feat-block{margin-bottom:20px}
+.feat-item{display:flex;gap:10px;padding:4px 0;font-size:11px;color:var(--text2)}
+.feat-item::before{content:'→';color:var(--gold);flex-shrink:0}
+.cond-card{background:var(--dark2);border:1px solid var(--border);padding:12px 16px;margin-bottom:8px}
+.cond-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:6px}
+.cond-trigger{font-size:11px;font-weight:600;color:#fff}
+.cond-fn{font-size:9px;color:var(--gold);background:var(--black);padding:2px 8px;border:1px solid var(--border);font-family:monospace;flex-shrink:0}
+.cond-condition{font-size:10px;color:var(--text3);margin-bottom:4px}
+.cond-action{font-size:11px;color:var(--text2);line-height:1.5}
+.road-group{margin-bottom:20px}
+.road-label{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.road-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.road-priority{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.road-item{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:11px;color:var(--text2)}
+.road-done{text-decoration:line-through;color:var(--text3)}
+.endpoint{background:var(--dark2);border:1px solid var(--border);margin-bottom:16px}
+.endpoint-hdr{padding:12px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.method{font-size:9px;font-weight:700;letter-spacing:1px;padding:3px 10px}
+.method.post{background:var(--ok);color:#000}
+.method.get{background:var(--gold);color:#000}
+.method.patch{background:#a78bfa;color:#000}
+.endpoint-path{font-size:13px;font-family:monospace;color:#fff}
+.endpoint-body{padding:14px 20px}
+.endpoint-desc{font-size:11px;color:var(--text2);margin-bottom:14px}
+.param-row{display:flex;gap:12px;padding:5px 0;border-bottom:1px solid var(--border);font-size:11px}
+.param-row:last-child{border-bottom:none}
+.param-name{width:160px;color:var(--gold);font-family:monospace;flex-shrink:0}
+.param-type{width:110px;color:var(--text3);font-size:10px;flex-shrink:0}
+.param-desc{color:var(--text2)}
+.resp-name{width:160px;color:var(--ok);font-family:monospace;flex-shrink:0}
+.db-table{margin-bottom:24px}
+.db-name{font-size:12px;color:var(--gold);font-family:monospace;background:var(--dark2);padding:4px 12px;border:1px solid var(--border);display:inline-block;margin-bottom:10px}
+.db-desc{font-size:11px;color:var(--text2);margin-left:12px}
+.db-grid{border:1px solid var(--border)}
+.db-head{display:grid;grid-template-columns:160px 140px 1fr;background:var(--dark2);padding:6px 16px;border-bottom:1px solid var(--border)}
+.db-head span{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3)}
+.db-row{display:grid;grid-template-columns:160px 140px 1fr;padding:7px 16px;border-bottom:1px solid var(--border);font-size:11px}
+.db-row:last-child{border-bottom:none}
+.db-row.pk{background:rgba(201,169,110,0.04)}
+.db-col{color:#fff;font-family:monospace}
+.db-col.pk{color:var(--gold)}
+.db-type{color:var(--ok);font-family:monospace}
+.db-desc-cell{color:var(--text2)}
+.email-card{background:var(--dark2);border:1px solid var(--border);margin-bottom:20px}
+.email-hdr{padding:12px 20px;border-bottom:1px solid var(--border);background:var(--black)}
+.email-title{font-size:11px;font-weight:600;color:#fff;margin-bottom:4px}
+.email-to{font-size:10px;color:var(--text3)}
+.email-to span{color:var(--gold)}
+.email-body{padding:16px 20px}
+.email-item{display:flex;gap:8px;padding:3px 0;font-size:11px;color:var(--text2)}
+.email-item::before{content:'·';color:var(--gold)}
+.note{padding:10px 14px;margin-bottom:12px;font-size:11px;color:var(--text2);line-height:1.6}
+.note.info{border-left:2px solid var(--gold);background:var(--glow)}
+.note.warn{border-left:2px solid #e5a020;background:rgba(229,160,32,0.06)}
+.note.ok{border-left:2px solid var(--ok);background:rgba(0,212,170,0.06)}
+.note.err{border-left:2px solid var(--err);background:rgba(224,82,82,0.06)}
+.note-icon{margin-right:6px}
+.env-block{background:var(--black);border:1px solid var(--border);padding:20px 24px;font-family:monospace;font-size:11px;line-height:2;margin-bottom:16px}
+.env-comment{color:var(--text3)}
+.env-key{color:var(--gold)}
+.env-eq{color:var(--text3)}
+.env-val{color:var(--text2)}
+.sub-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;margin-top:14px}
+.mode-box{border:1px solid var(--border);padding:14px 18px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start}
+.mode-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.mode-title{font-size:11px;font-weight:600;margin-bottom:4px}
+.mode-desc{font-size:11px;color:var(--text2);line-height:1.6}
+.readme-block{background:var(--dark2);border:1px solid var(--border);padding:20px 24px;font-family:monospace;font-size:11px;line-height:1.8;margin-bottom:16px;white-space:pre-wrap}
+.readme-h1{color:var(--gold);font-size:14px;font-weight:600}
+.readme-h2{color:var(--text);font-size:12px;font-weight:600;margin-top:4px}
+.readme-h3{color:var(--ok);font-size:11px}
+.readme-txt{color:var(--text2)}
+.readme-code{color:var(--gold)}
+.readme-comment{color:var(--text3)}
+.arch-block{background:var(--black);border:1px solid var(--border);padding:20px 24px;font-family:monospace;font-size:11px;line-height:1.8;margin-bottom:16px;white-space:pre;overflow-x:auto;color:var(--text2)}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <div>
+      <div class="logo-main">ALGEBRA</div>
+      <div class="logo-sub">Capital</div>
+    </div>
+    <div class="hdr-divider"></div>
+    <span class="hdr-title">Documentação Técnica</span>
+  </div>
+  <div class="hdr-left" style="gap:10px">
+    <a href="index.html" class="hdr-back">← Formulário KYC</a>
+    <div class="badge">KYC · v1.0</div>
+  </div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="nav-group-label">◈ README Técnico</div>
+    <button class="nav-btn active" onclick="show('overview',this)">Visão Geral</button>
+    <button class="nav-btn" onclick="show('readme',this)">README.md</button>
+    <button class="nav-btn" onclick="show('architecture',this)">Arquitectura</button>
+    <button class="nav-btn" onclick="show('modes',this)">Sistema de Modos</button>
+    <button class="nav-btn" onclick="show('structure',this)">Estrutura do Formulário</button>
+    <button class="nav-btn" onclick="show('features',this)">Funcionalidades</button>
+    <button class="nav-btn" onclick="show('conditional',this)">Lógica Condicional</button>
+    <button class="nav-btn" onclick="show('storage',this)">Persistência Local</button>
+    <button class="nav-btn" onclick="show('pdf',this)">Geração de PDF</button>
+    <button class="nav-btn" onclick="show('todo',this)">Roadmap</button>
+    <div class="nav-sep"></div>
+    <div class="nav-group-label">⬡ Especificação Backend</div>
+    <button class="nav-btn" onclick="show('endpoints',this)">Endpoints API</button>
+    <button class="nav-btn" onclick="show('fields',this)">Campos do Formulário</button>
+    <button class="nav-btn" onclick="show('database',this)">Base de Dados</button>
+    <button class="nav-btn" onclick="show('files',this)">Upload de Ficheiros</button>
+    <button class="nav-btn" onclick="show('security',this)">Segurança &amp; Compliance</button>
+    <button class="nav-btn" onclick="show('cmd',this)">Integração CMD</button>
+    <button class="nav-btn" onclick="show('emails',this)">Emails Automáticos</button>
+    <button class="nav-btn" onclick="show('env',this)">Variáveis de Ambiente</button>
+    <button class="nav-btn" onclick="show('deploy',this)">Deploy &amp; Setup</button>
+  </nav>
+
+  <main class="content">
+
+    <!-- VISÃO GERAL -->
+    <div class="page active" id="page-overview">
+      <div class="page-title">Visão Geral</div>
+      <p class="body-text">Formulário KYC (<em>Know Your Customer</em>) da Algebra Capital — aplicação web <strong>standalone em HTML/CSS/JS puro</strong>, sem dependências de framework, em conformidade com a <strong>Lei n.º 83/2017 de 18 de agosto</strong> (prevenção de branqueamento de capitais e financiamento do terrorismo) e com o <strong>RGPD (UE) 2016/679</strong>. Suporta Pessoa Singular e Pessoa Coletiva, com sistema de modos Interno/Cliente e exportação PDF.</p>
+
+      <div class="sec-title">Stack Tecnológico</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">Frontend</span><span class="row-val">HTML5 + CSS3 + JavaScript (ES5/6 vanilla — ficheiro único)</span></div>
+        <div class="row"><span class="row-lbl">PDF</span><span class="row-val">jsPDF 2.5.1 (CDN cdnjs.cloudflare.com)</span></div>
+        <div class="row"><span class="row-lbl">Fontes</span><span class="row-val">Google Fonts — Cormorant Garamond + Montserrat</span></div>
+        <div class="row"><span class="row-lbl">Persistência local</span><span class="row-val">localStorage — progresso, modo, fonte, tipo, referência</span></div>
+        <div class="row"><span class="row-lbl">Internacionalização</span><span class="row-val">Objeto T interno — PT e EN</span></div>
+        <div class="row"><span class="row-lbl">Backend</span><span class="row-val">Não implementado — especificação completa nesta documentação</span></div>
+        <div class="row"><span class="row-lbl">Backend recomendado</span><span class="row-val">Node.js 20+ (Express) ou Python 3.12+ (FastAPI) + PostgreSQL 15+</span></div>
+      </div>
+
+      <div class="sec-title">Ficheiros do Projecto</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl"><code>index.html</code></span><span class="row-val">Formulário KYC completo (HTML + CSS + JS num só ficheiro)</span></div>
+        <div class="row"><span class="row-lbl"><code>docs.html</code></span><span class="row-val">Esta página de documentação técnica</span></div>
+      </div>
+
+      <div class="sec-title">Conformidade Legal</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">AML/CFT</span><span class="row-val">Lei n.º 83/2017, de 18 de agosto — identificação, diligência, PeP, conservação (7 anos)</span></div>
+        <div class="row"><span class="row-lbl">RGPD</span><span class="row-val">Regulamento (UE) 2016/679 + Lei n.º 58/2019 — base legal, direitos do titular, DPO</span></div>
+        <div class="row"><span class="row-lbl">RCBE</span><span class="row-val">Registo Central do Beneficiário Efetivo — obrigatório para Pessoa Coletiva</span></div>
+        <div class="row"><span class="row-lbl">CMD</span><span class="row-val">Autenticação via Chave Móvel Digital (gov.pt) — OAuth 2.0 / OpenID Connect</span></div>
+        <div class="row"><span class="row-lbl">NIPC</span><span class="row-val">513912878 · Av. da Liberdade, 110, 5.º · 1250-146 Lisboa</span></div>
+      </div>
+
+      <div class="sec-title">Versões</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">v1.0 (actual)</span><span class="row-val">Formulário base — Pessoa Singular e Coletiva, PT/EN, Sistema Modos Interno/Cliente, PDF, RGPD, PeP, CMD, Titulares dinâmicos, Representante Legal</span></div>
+      </div>
+    </div>
+
+    <!-- README -->
+    <div class="page" id="page-readme">
+      <div class="page-title">README.md</div>
+      <p class="body-text">Conteúdo do <code style="color:var(--gold)">README.md</code> para o repositório. Copia e cola directamente.</p>
+      <div class="readme-block"><span class="readme-h1"># Algebra Capital — Formulário KYC</span>
+
+<span class="readme-comment"><!-- Formulário KYC standalone da Algebra Capital --></span>
+
+<span class="readme-h2">## Descrição</span>
+<span class="readme-txt">Formulário KYC (Know Your Customer) da Algebra Capital, NIPC 513912878.
+Desenvolvido em HTML/CSS/JS puro (sem framework).
+Conforme com a Lei n.º 83/2017 (AML/CFT) e RGPD (UE 2016/679).
+Suporta Pessoa Singular e Pessoa Coletiva, sistema de modos Interno/Cliente e exportação PDF.</span>
+
+<span class="readme-h2">## Stack</span>
+<span class="readme-txt">- Frontend: HTML5 + CSS3 + JavaScript ES6 vanilla (ficheiro único)
+- PDF: jsPDF 2.5.1 (CDN cdnjs.cloudflare.com)
+- Fontes: Google Fonts (Cormorant Garamond + Montserrat)
+- Persistência: localStorage
+- i18n: objeto T interno (PT / EN)
+- Backend: não implementado — ver especificação em docs.html</span>
+
+<span class="readme-h2">## Ficheiros</span>
+<span class="readme-code">index.html</span>  <span class="readme-txt">— Formulário KYC completo</span>
+<span class="readme-code">docs.html</span>   <span class="readme-txt">— Documentação técnica e especificação backend</span>
+<span class="readme-code">README.md</span>   <span class="readme-txt">— Este ficheiro</span>
+
+<span class="readme-h2">## Funcionalidades (v1.0)</span>
+<span class="readme-txt">- [x] Pessoa Singular e Pessoa Coletiva
+- [x] Sistema de modos Interno / Cliente
+- [x] Secção Referência do Processo (oculta em modo cliente)
+- [x] Secção Negócio: editável internamente, readonly para o cliente
+- [x] Validação em tempo real — NIF, IBAN, email
+- [x] Toast com lista clicável de erros de validação
+- [x] Exportação PDF com marca de água CONFIDENTIAL
+- [x] Rascunho PDF (sem validação)
+- [x] Pré-visualização HTML do PDF antes de descarregar
+- [x] Internacionalização PT / EN
+- [x] Persistência local (localStorage)
+- [x] RGPD accordion com texto legal Algebra Capital + Lei 83/2017
+- [x] Declarações do(s) Proponente(s) (4 pontos AML/CFT)
+- [x] Definições Legais completas — PeP (Lei 83/2017)
+- [x] Titulares dinâmicos (Pessoa Coletiva)
+- [x] Representante Legal condicional
+- [x] PeP — 4 questões Lei 83/2017 (arts. 2.º, 19.º e 39.º)
+- [x] CMD — autenticação (simulada; pronta para integração real)
+- [x] Tamanho de fonte ajustável (normal / grande)</span>
+
+<span class="readme-h2">## Uso — Modo Interno vs. Modo Cliente</span>
+<span class="readme-h3">Modo Interno (default)</span>
+<span class="readme-txt">- Todas as secções visíveis e editáveis
+- Secção Referência do Processo: visível e editável (etiqueta INTERNO)
+- Secção A — Negócio: visível e editável (etiqueta PREENCHIDO PELA ALGEBRA)</span>
+
+<span class="readme-h3">Modo Cliente</span>
+<span class="readme-txt">- Secção Referência: completamente oculta
+- Secção A — Negócio: visível mas bloqueada (readonly + overlay), etiqueta PREENCHIDO PELA ALGEBRA
+- Restante formulário: editável pelo cliente</span>
+
+<span class="readme-h2">## Conformidade Legal</span>
+<span class="readme-txt">- Lei n.º 83/2017, de 18 de agosto — identificação, diligência, PeP, conservação (7 anos)
+- RGPD (UE 2016/679) + Lei n.º 58/2019 — base legal, direitos do titular, contacto DPO
+- RCBE — Registo Central do Beneficiário Efetivo (obrigatório para Pessoa Coletiva)</span>
+
+<span class="readme-h2">## Backend (a implementar)</span>
+<span class="readme-txt">Ver docs.html para especificação completa.
+Stack proposta: Node.js/Express ou Python/FastAPI + PostgreSQL + S3/Cloudinary + SendGrid.</span>
+
+<span class="readme-comment">---
+Algebra Capital, Lda. · NIPC 513912878 · Av. da Liberdade, 110, 5.º · Lisboa
+Uso interno. Repositório privado.</span>
+</div>
+    </div>
+
+    <!-- ARQUITECTURA -->
+    <div class="page" id="page-architecture">
+      <div class="page-title">Arquitectura do Sistema</div>
+      <p class="body-text">Diagrama de alto nível da arquitectura proposta após implementação do backend.</p>
+      <div class="arch-block">┌─────────────────────────────────────────────────────┐
+│                  CLIENTE (Browser)                   │
+│  HTML + CSS + Vanilla JS  ·  jsPDF 2.5.1            │
+│  localStorage (rascunho)  ·  FormData (submissão)   │
+└──────────────────────┬──────────────────────────────┘
+                       │ HTTPS / TLS 1.2+
+┌──────────────────────▼──────────────────────────────┐
+│                  API REST (Backend)                   │
+│  POST /api/kyc/submit                                │
+│  POST /api/kyc/upload                                │
+│  GET  /api/kyc/:ref                                  │
+│  POST /api/cmd/verify                                │
+│  GET  /admin/submissions                             │
+└──────────┬──────────────────────┬───────────────────┘
+           │                      │
+┌──────────▼──────┐    ┌──────────▼──────────────────┐
+│  Base de Dados  │    │  Armazenamento de Ficheiros   │
+│  PostgreSQL 15+ │    │  AWS S3 / Cloudinary          │
+│  (submissões)   │    │  (documentos KYC cifrados)    │
+└─────────────────┘    └─────────────────────────────┘
+           │
+┌──────────▼──────────────────────────────────────────┐
+│           Serviço CMD (Gov.pt)                        │
+│  OAuth 2.0 + OpenID Connect                          │
+│  https://autenticacao.gov.pt                         │
+└─────────────────────────────────────────────────────┘
+           │
+┌──────────▼──────────────────────────────────────────┐
+│           Email (SendGrid / SMTP)                     │
+│  Confirmação ao cliente + Alerta PeP à equipa        │
+└─────────────────────────────────────────────────────┘</div>
+
+      <div class="sec-title">Stack Recomendada</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">Backend</span><span class="row-val">Node.js 20+ (Express) ou Python 3.12+ (FastAPI)</span></div>
+        <div class="row"><span class="row-lbl">Base de dados</span><span class="row-val">PostgreSQL 15+</span></div>
+        <div class="row"><span class="row-lbl">Ficheiros</span><span class="row-val">AWS S3 ou Cloudinary</span></div>
+        <div class="row"><span class="row-lbl">Autenticação interna</span><span class="row-val">JWT (HS256 ou RS256) — expiração 8h</span></div>
+        <div class="row"><span class="row-lbl">CMD</span><span class="row-val">OAuth 2.0 / OpenID Connect (autenticacao.gov.pt)</span></div>
+        <div class="row"><span class="row-lbl">Email</span><span class="row-val">SendGrid API ou SMTP próprio</span></div>
+        <div class="row"><span class="row-lbl">Infraestrutura</span><span class="row-val">Docker + Nginx reverse proxy ou Vercel/Railway</span></div>
+      </div>
+    </div>
+
+    <!-- SISTEMA DE MODOS -->
+    <div class="page" id="page-modes">
+      <div class="page-title">Sistema de Modos</div>
+      <p class="body-text">O formulário opera em dois modos distintos, controlados por um banner sticky abaixo do cabeçalho. O modo é persistido em localStorage e aplicado automaticamente no carregamento.</p>
+
+      <div class="mode-box" style="border-color:#2a3a2a;background:#161e16">
+        <div class="mode-icon">●</div>
+        <div>
+          <div class="mode-title" style="color:#6abf6a">Modo Interno (default)</div>
+          <div class="mode-desc">
+            Todas as secções visíveis e editáveis.<br>
+            — Secção <strong>Referência do Processo</strong>: visível e editável, marcada com etiqueta "INTERNO".<br>
+            — Secção <strong>A — Negócio</strong>: visível e editável, marcada com "PREENCHIDO PELA ALGEBRA".<br>
+            — Restante formulário: editável pelo staff interno.
+          </div>
+        </div>
+      </div>
+
+      <div class="mode-box" style="border-color:rgba(201,169,110,0.3);background:rgba(201,169,110,0.04)">
+        <div class="mode-icon">●</div>
+        <div>
+          <div class="mode-title" style="color:var(--gold)">Modo Cliente</div>
+          <div class="mode-desc">
+            Vista do cliente — enviada/partilhada com o proponente para preenchimento.<br>
+            — Secção <strong>Referência do Processo</strong>: completamente oculta (<code>display:none</code>).<br>
+            — Secção <strong>A — Negócio</strong>: visível mas bloqueada (<code>pointer-events:none</code> + overlay), marcada com "PREENCHIDO PELA ALGEBRA".<br>
+            — Restante formulário: editável pelo cliente.
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-title">Implementação Técnica</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">Variável de estado</span><span class="row-val"><code>currentModo</code> — 'interno' | 'cliente'</span></div>
+        <div class="row"><span class="row-lbl">Função toggle</span><span class="row-val"><code>toggleModo()</code> → chama <code>applyModo()</code></span></div>
+        <div class="row"><span class="row-lbl">Persistência</span><span class="row-val"><code>localStorage.setItem('alg_modo', currentModo)</code></span></div>
+        <div class="row"><span class="row-lbl">CSS — secção interna</span><span class="row-val"><code>body.cliente-mode .internal-section { display:none !important }</code></span></div>
+        <div class="row"><span class="row-lbl">CSS — secção readonly</span><span class="row-val"><code>body.cliente-mode .readonly-section</code> — inputs com <code>pointer-events:none</code> + overlay</span></div>
+        <div class="row"><span class="row-lbl">Validação</span><span class="row-val">Campos da <code>.readonly-section</code> são excluídos de <code>validateRequired()</code> em Modo Cliente</span></div>
+        <div class="row"><span class="row-lbl">Etiquetas visuais</span><span class="row-val"><code>::before</code> pseudo-elemento nas secções com texto de contexto</span></div>
+      </div>
+      <div class="note info"><span class="note-icon">ℹ</span>Em produção, o ideal é gerar um link com parâmetro <code>?modo=cliente</code> que force o modo automaticamente no carregamento — item no roadmap.</div>
+    </div>
+
+    <!-- ESTRUTURA -->
+    <div class="page" id="page-structure">
+      <div class="page-title">Estrutura do Formulário</div>
+      <p class="body-text">Secções do formulário e respectiva visibilidade/editabilidade.
+        <span class="step-tag tag-internal">Interno</span> apenas staff &nbsp;
+        <span class="step-tag tag-readonly">Só leitura (cliente)</span> preenchido internamente &nbsp;
+        <span class="step-tag tag-client">Cliente</span> preenchido pelo cliente
+      </p>
+
+      <div class="step-item">
+        <div class="step-num">—</div>
+        <div>
+          <div class="step-title">Referência do Processo <span class="step-tag tag-internal">Interno</span></div>
+          <div class="step-desc">Referência interna gerada automaticamente (ALG-AAAA-XXXX, persistida em localStorage). ID Devedor(es) obrigatório. Identificação do(s) Crédito(s) opcional. <strong>Completamente oculta em Modo Cliente.</strong></div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">A</div>
+        <div>
+          <div class="step-title">Negócio <span class="step-tag tag-readonly">Só leitura (cliente)</span></div>
+          <div class="step-desc">Propósito do negócio, montante da operação, sinal, origem dos fundos, proveniência, meios de pagamento, IBANs. Em Modo Cliente: visível mas todos os campos bloqueados com overlay de protecção e etiqueta "PREENCHIDO PELA ALGEBRA".</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">B</div>
+        <div>
+          <div class="step-title">Proponente <span class="step-tag tag-client">Cliente</span></div>
+          <div class="step-desc">Toggle <strong>Pessoa Singular / Pessoa Coletiva</strong>. <strong>Singular:</strong> dados pessoais, documento (IRN/AIMA/Outra), NIF, residência, profissão, contacto. Secção cônjuge condicional. <strong>Coletiva:</strong> denominação social, NIPC, CAEs, objeto social, sede, forma jurídica, responsável de contacto, código RCBE. Secção Titulares com blocos adicionáveis dinamicamente.</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">C</div>
+        <div>
+          <div class="step-title">Titulares (Pessoa Coletiva) <span class="step-tag tag-client">Cliente</span></div>
+          <div class="step-desc">Blocos dinâmicos adicionáveis por titular — nome, cargo, % capital, beneficiário efetivo, NIF, nacionalidade, documento, residência.</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">D</div>
+        <div>
+          <div class="step-title">Representante Legal <span class="step-tag tag-client">Cliente</span></div>
+          <div class="step-desc">Condicional (Sim/Não). Dados pessoais, documento, NIF, residência, contacto. Todos os campos obrigatórios quando activo.</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">E</div>
+        <div>
+          <div class="step-title">PeP — Pessoa Politicamente Exposta <span class="step-tag tag-client">Cliente</span></div>
+          <div class="step-desc">4 questões Sim/Não conforme Lei 83/2017 (arts. 2.º, 19.º e 39.º). Ao responder Sim, campos expandem e tornam-se obrigatórios. Definições legais completas em accordion.</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">F</div>
+        <div>
+          <div class="step-title">Documentos Obrigatórios <span class="step-tag tag-client">Cliente</span></div>
+          <div class="step-desc">Lista distinta por tipo de proponente. Singular: doc. identificação, NIF, procuração, fatura serviço público, recibo vencimento, IBAN. Coletiva: certidão RC + RCBE, docs titulares, NIF, deliberação/procuração, IBAN. Secção comum: comprovativo de origem de fundos (mínimo 1 obrigatório com upload, 6 opções). Formatos: PDF, JPG, PNG. Máx. 10MB por ficheiro.</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">G</div>
+        <div>
+          <div class="step-title">Proteção de Dados &amp; Declarações <span class="step-tag tag-client">Cliente</span></div>
+          <div class="step-desc">Caixa RGPD em accordion. Declarações do(s) Proponente(s) (4 pontos AML/CFT). Exportação PDF com pré-visualização. Autenticação CMD e upload de assinatura física para 2 proponentes.</div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">H</div>
+        <div>
+          <div class="step-title">Anexo I — Definições Legais</div>
+          <div class="step-desc">Accordion com definições completas: Beneficiário Efetivo (art. 30.º), PeP (13 funções), Membros próximos da família, Pessoas estreitamente associadas, Titular de outro Cargo Político ou Público — tudo conforme Lei n.º 83/2017.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FUNCIONALIDADES -->
+    <div class="page" id="page-features">
+      <div class="page-title">Funcionalidades</div>
+
+      <div class="feat-block"><div class="sec-title">Sistema de Modos Interno / Cliente</div>
+        <div class="feat-item">Banner sticky com indicador de modo activo e descrição contextual</div>
+        <div class="feat-item">Modo Interno: todas as secções editáveis, etiquetas de contexto visíveis</div>
+        <div class="feat-item">Modo Cliente: secção Referência oculta, secção Negócio bloqueada com overlay</div>
+        <div class="feat-item">Modo guardado em localStorage — persiste entre sessões</div>
+        <div class="feat-item">Validação dinâmica exclui campos readonly em Modo Cliente</div>
+      </div>
+
+      <div class="feat-block"><div class="sec-title">Pessoa Singular / Pessoa Coletiva</div>
+        <div class="feat-item">Toggle no topo do formulário — condiciona secções, documentos e PDF</div>
+        <div class="feat-item">Secção Titulares dinâmica — blocos adicionáveis/removíveis via <code>addTitular()</code> / <code>removeTitular(n)</code></div>
+        <div class="feat-item">Campos obrigatórios da secção activa recebem <code>data-req</code> dinamicamente em <code>setType()</code></div>
+        <div class="feat-item">Documentos obrigatórios distintos por tipo de proponente</div>
+        <div class="feat-item">PDF exportado com secção correcta conforme tipo seleccionado</div>
+      </div>
+
+      <div class="feat-block"><div class="sec-title">Validação em Tempo Real</div>
+        <div class="feat-item">Campos obrigatórios via atributo <code>data-req</code> (<code>data-req-pt</code> e <code>data-req-en</code> separados)</div>
+        <div class="feat-item">Campos em secções condicionais recebem/perdem <code>data-req</code> dinamicamente</div>
+        <div class="feat-item">Toast com lista clicável de erros — clique navega e foca o campo</div>
+        <div class="feat-item">Campos readonly (Modo Cliente) excluídos da validação</div>
+        <div class="feat-item">Validação de documentos obrigatórios e comprovativos de fundos</div>
+      </div>
+
+      <div class="feat-block"><div class="sec-title">Internacionalização PT/EN</div>
+        <div class="feat-item">Objeto T com todas as strings traduzidas em pt e en</div>
+        <div class="feat-item"><code>setLang()</code> actualiza labels, <code>data-req</code> e labels de modo dinamicamente</div>
+        <div class="feat-item">PDF exportado no idioma activo no momento da exportação</div>
+        <div class="feat-item">Preferência guardada em localStorage</div>
+      </div>
+
+      <div class="feat-block"><div class="sec-title">Geração de PDF</div>
+        <div class="feat-item">jsPDF 2.5.1 — marca de água CONFIDENTIAL diagonal em todas as páginas</div>
+        <div class="feat-item">Cabeçalho com logótipo ALGEBRA CAPITAL em texto, fundo branco, rodapé com numeração p/total</div>
+        <div class="feat-item">Secções de dados adaptadas ao tipo (Singular vs Coletiva)</div>
+        <div class="feat-item">Modal de pré-visualização HTML antes de descarregar</div>
+        <div class="feat-item">Modo normal (com validação completa) e rascunho (sem validação)</div>
+      </div>
+
+      <div class="feat-block"><div class="sec-title">Persistência Local</div>
+        <div class="feat-item"><code>saveProgress()</code> serializa todos os inputs para localStorage</div>
+        <div class="feat-item"><code>loadProgress()</code> restaura automaticamente no carregamento</div>
+        <div class="feat-item">Referência interna persistida — não regenerada em sessões seguintes</div>
+        <div class="feat-item">Também guardados: modo, tamanho de fonte, tipo de proponente</div>
+        <div class="feat-item">Uploads de ficheiros não são persistidos (limitação nativa do browser)</div>
+      </div>
+    </div>
+
+    <!-- LÓGICA CONDICIONAL -->
+    <div class="page" id="page-conditional">
+      <div class="page-title">Lógica Condicional</div>
+      <p class="body-text">Todos os comportamentos condicionais implementados e a função JS responsável.</p>
+
+      <div class="cond-card"><div class="cond-top"><span class="cond-trigger">Modo Interno → Modo Cliente</span><span class="cond-fn">toggleModo() / applyModo()</span></div><div class="cond-condition">Condição: botão no banner clicado</div><div class="cond-action">Oculta <code>.internal-section</code>. Bloqueia campos de <code>.readonly-section</code> com overlay. Altera labels do banner. Exclui campos readonly de <code>validateRequired()</code>. Estado guardado em localStorage.</div></div>
+
+      <div class="cond-card"><div class="cond-top"><span class="cond-trigger">Toggle Singular / Coletiva</span><span class="cond-fn">setType(type)</span></div><div class="cond-condition">Condição: botão de tipo clicado</div><div class="cond-action">Mostra/oculta <code>#section-singular</code>, <code>#section-coletiva</code>, <code>#docs-singular</code>, <code>#docs-coletiva</code>. Aplica/remove <code>data-req</code> nos campos da secção activa. Salva tipo em localStorage.</div></div>
+
+      <div class="cond-card"><div class="cond-top"><span class="cond-trigger">Titular — Adicionar / Remover</span><span class="cond-fn">addTitular() / removeTitular(n)</span></div><div class="cond-condition">Condição: botão "Adicionar Titular" ou "Remover" clicado</div><div class="cond-action">Cria/remove bloco HTML com campos de titular. Em modo coletiva activo, aplica <code>data-req</code> automaticamente aos novos campos. Actualiza progresso.</div></div>
+
+      <div class="cond-card"><div class="cond-top"><span class="cond-trigger">Cônjuge — Sim</span><span class="cond-fn">ynToggle()</span></div><div class="cond-condition">Condição: botão Sim clicado em questão de cônjuge</div><div class="cond-action">Secção <code>#conj_det</code> expande. Todos os campos tornam-se obrigatórios. Ao clicar Não: campos limpos e <code>data-req</code> removido.</div></div>
+
+      <div class="cond-card"><div class="cond-top"><span class="cond-trigger">Representante Legal — Sim</span><span class="cond-fn">ynToggle()</span></div><div class="cond-condition">Condição: botão Sim clicado</div><div class="cond-action">Secção <code>#rep_det</code> expande. Todos os campos (exceto NIF estrangeiro) tornam-se obrigatórios.</div></div>
+
+      <div class="cond-card"><div class="cond-top"><span class="cond-trigger">Entidade Emitente — Outra</span><span class="cond-fn">toggleIssuerOther()</span></div><div class="cond-condition">Condição: select = 'outro'</div><div class="cond-action">Campo de texto livre aparece para especificar a entidade. Aplicado em Proponente Singular, Representante Legal e Titulares (Coletiva).</div></div>
+
+      <div class="cond-card"><div class="cond-top"><span class="cond-trigger">PeP — Questões 1 a 4</span><span class="cond-fn">ynToggle()</span></div><div class="cond-condition">Condição: botão Sim clicado em qualquer questão PeP</div><div class="cond-action">Campos expandem e tornam-se todos obrigatórios, incluindo início de exercício (<code>input[type=month]</code>). Flag PeP activa no PDF e na submissão backend.</div></div>
+
+      <div class="cond-card"><div class="cond-top"><span class="cond-trigger">Comprovativo de fundos — item marcado</span><span class="cond-fn">ckchk click handler</span></div><div class="cond-condition">Condição: checkbox de comprovativo marcada</div><div class="cond-action">Botão de upload aparece. Se não há ficheiro carregado, mostra aviso. Actualiza validação de documentos. Ao desmarcar: upload e ficheiro limpos.</div></div>
+
+      <div class="cond-card"><div class="cond-top"><span class="cond-trigger">Proveniência de Fundos / Outro</span><span class="cond-fn">toggleChkOutro()</span></div><div class="cond-condition">Condição: checkbox 'Outro' marcada</div><div class="cond-action">Campo de texto livre aparece para especificação. Remove-se ao desmarcar.</div></div>
+
+      <div class="cond-card"><div class="cond-top"><span class="cond-trigger">RGPD — accordion</span><span class="cond-fn">toggleGdpr()</span></div><div class="cond-condition">Condição: clique no cabeçalho da caixa RGPD</div><div class="cond-action">Expande/colapsa o corpo com texto legal completo. Chevron roda 180°.</div></div>
+
+      <div class="cond-card"><div class="cond-top"><span class="cond-trigger">Definições Legais — accordion</span><span class="cond-fn">toggleAnnex()</span></div><div class="cond-condition">Condição: botão "Ver definições legais" clicado</div><div class="cond-action">Expande/colapsa definições legais completas: BE, PeP, membros família, pessoas estreitamente associadas, titular cargo público.</div></div>
+
+      <div class="cond-card"><div class="cond-top"><span class="cond-trigger">CMD — Autenticar</span><span class="cond-fn">openCmd(n) / confirmCmd(n)</span></div><div class="cond-condition">Condição: botão CMD clicado</div><div class="cond-action">Abre portal autenticacao.gov.pt em nova aba. Mostra botões Confirmar/Cancelar. Ao confirmar: marca estado como autenticado, actualiza UI e progresso.</div></div>
+
+      <div class="cond-card"><div class="cond-top"><span class="cond-trigger">Idioma — PT / EN</span><span class="cond-fn">setLang(lang)</span></div><div class="cond-condition">Condição: botão de idioma clicado</div><div class="cond-action">Actualiza todos os elementos <code>data-req-pt</code>/<code>data-req-en</code> e labels do banner de modo. Preferência guardada em localStorage.</div></div>
+    </div>
+
+    <!-- PERSISTÊNCIA -->
+    <div class="page" id="page-storage">
+      <div class="page-title">Persistência Local</div>
+      <p class="body-text">O rascunho do formulário é guardado em <code style="color:var(--gold)">localStorage</code> automaticamente.</p>
+
+      <div class="sec-title">Chaves localStorage</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl"><code>alg_kyc</code></span><span class="row-val">JSON com todos os valores dos campos <code>input</code>, <code>select</code>, <code>textarea</code> (incluindo <code>ref_interna</code>)</span></div>
+        <div class="row"><span class="row-lbl"><code>alg_kyc_type</code></span><span class="row-val">Tipo de proponente activo: <code>'singular'</code> | <code>'coletiva'</code></span></div>
+        <div class="row"><span class="row-lbl"><code>alg_modo</code></span><span class="row-val">Modo activo: <code>'interno'</code> | <code>'cliente'</code></span></div>
+        <div class="row"><span class="row-lbl"><code>alg_font</code></span><span class="row-val">Tamanho de fonte: <code>'normal'</code> | <code>'large'</code></span></div>
+      </div>
+
+      <div class="note warn"><span class="note-icon">⚠</span>Os ficheiros carregados (<code>docFiles</code>) são mantidos apenas em memória durante a sessão — <strong>não são persistidos</strong> no localStorage por limitação nativa do browser.</div>
+      <div class="note info"><span class="note-icon">ℹ</span>A referência interna (<code>ALG-YYYY-XXXX</code>) é gerada uma única vez e guardada em <code>alg_kyc</code>. Nas sessões seguintes é restaurada em vez de regenerada.</div>
+    </div>
+
+    <!-- PDF -->
+    <div class="page" id="page-pdf">
+      <div class="page-title">Geração de PDF</div>
+      <p class="body-text">O PDF é gerado <strong>no browser</strong> via <strong>jsPDF 2.5.1</strong>, sem intervenção do backend. O backend pode opcionalmente oferecer geração server-side para maior fidelidade (ex: Puppeteer, WeasyPrint).</p>
+
+      <div class="sec-title">Estrutura do PDF Gerado</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">Cabeçalho</span><span class="row-val">Fundo branco, logótipo ALGEBRA CAPITAL (canvas SVG), ref. do processo, NIPC</span></div>
+        <div class="row"><span class="row-lbl">Marca de água</span><span class="row-val">"CONFIDENTIAL" diagonal, opacidade 3%, em todas as páginas</span></div>
+        <div class="row"><span class="row-lbl">Secção A</span><span class="row-val">Negócio — propósito, montante, sinal, origem fundos, IBAN</span></div>
+        <div class="row"><span class="row-lbl">Secção B</span><span class="row-val">Proponente Singular ou Coletivo conforme tipo seleccionado</span></div>
+        <div class="row"><span class="row-lbl">Secção C</span><span class="row-val">Titulares (apenas Pessoa Coletiva)</span></div>
+        <div class="row"><span class="row-lbl">Rep. Legal</span><span class="row-val">Incluído se Sim (nome + NIF)</span></div>
+        <div class="row"><span class="row-lbl">PeP</span><span class="row-val">Resposta às 4 questões com detalhe se Sim</span></div>
+        <div class="row"><span class="row-lbl">Assinaturas</span><span class="row-val">Linhas para assinatura física — Proponente 1 e Proponente 2 / Rep. Legal</span></div>
+        <div class="row"><span class="row-lbl">Rodapé</span><span class="row-val">Morada, website, numeração p/total páginas</span></div>
+      </div>
+
+      <div class="sec-title">Modos de Exportação</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">Normal</span><span class="row-val">Executa <code>validateRequired()</code> antes de exportar. Bloqueia se houver campos em falta.</span></div>
+        <div class="row"><span class="row-lbl">Rascunho</span><span class="row-val">Exporta sem validação — todos os campos preenchidos até ao momento.</span></div>
+        <div class="row"><span class="row-lbl">Pré-visualização</span><span class="row-val">Modal HTML antes de descarregar. Botão "Descarregar PDF" gera o ficheiro via jsPDF.</span></div>
+      </div>
+    </div>
+
+    <!-- ROADMAP -->
+    <div class="page" id="page-todo">
+      <div class="page-title">Roadmap</div>
+
+      <div class="road-group">
+        <div class="road-label"><div class="road-dot" style="background:var(--ok)"></div><span class="road-priority" style="color:var(--ok)">Concluído (v1.0)</span></div>
+        <div class="road-item"><span style="color:var(--ok);flex-shrink:0">✓</span><span class="road-done">Formulário base Pessoa Singular e Coletiva</span></div>
+        <div class="road-item"><span style="color:var(--ok);flex-shrink:0">✓</span><span class="road-done">Sistema de modos Interno / Cliente</span></div>
+        <div class="road-item"><span style="color:var(--ok);flex-shrink:0">✓</span><span class="road-done">Secção Referência do Processo (interna)</span></div>
+        <div class="road-item"><span style="color:var(--ok);flex-shrink:0">✓</span><span class="road-done">RGPD accordion com texto legal completo Algebra Capital</span></div>
+        <div class="road-item"><span style="color:var(--ok);flex-shrink:0">✓</span><span class="road-done">Declarações do(s) Proponente(s) expandidas (4 pontos AML/CFT)</span></div>
+        <div class="road-item"><span style="color:var(--ok);flex-shrink:0">✓</span><span class="road-done">Definições legais completas — Lei 83/2017 (PeP, família, associados, cargos públicos)</span></div>
+        <div class="road-item"><span style="color:var(--ok);flex-shrink:0">✓</span><span class="road-done">Titulares dinâmicos (Pessoa Coletiva)</span></div>
+        <div class="road-item"><span style="color:var(--ok);flex-shrink:0">✓</span><span class="road-done">Representante Legal condicional</span></div>
+        <div class="road-item"><span style="color:var(--ok);flex-shrink:0">✓</span><span class="road-done">Geração PDF com fundo branco, logótipo e pré-visualização</span></div>
+        <div class="road-item"><span style="color:var(--ok);flex-shrink:0">✓</span><span class="road-done">Upload de documentos com validação por tipo de proponente</span></div>
+      </div>
+
+      <div class="road-group">
+        <div class="road-label"><div class="road-dot" style="background:var(--err)"></div><span class="road-priority" style="color:var(--err)">Alta prioridade</span></div>
+        <div class="road-item"><span style="color:var(--err);flex-shrink:0">○</span>Endpoint POST /api/kyc/submit — receber e guardar dados na base de dados</div>
+        <div class="road-item"><span style="color:var(--err);flex-shrink:0">○</span>Upload de documentos para armazenamento (S3 / Cloudinary)</div>
+        <div class="road-item"><span style="color:var(--err);flex-shrink:0">○</span>Email de confirmação ao cliente (SendGrid)</div>
+        <div class="road-item"><span style="color:var(--err);flex-shrink:0">○</span>Email de notificação à equipa com flag PeP</div>
+      </div>
+
+      <div class="road-group">
+        <div class="road-label"><div class="road-dot" style="background:var(--gold)"></div><span class="road-priority" style="color:var(--gold)">Média prioridade</span></div>
+        <div class="road-item"><span style="color:var(--gold);flex-shrink:0">○</span>Painel de administração para ver e gerir submissões</div>
+        <div class="road-item"><span style="color:var(--gold);flex-shrink:0">○</span>Parâmetro URL <code>?modo=cliente</code> para forçar modo no carregamento</div>
+        <div class="road-item"><span style="color:var(--gold);flex-shrink:0">○</span>Autenticação CMD real (actualmente abre portal e confirma localmente)</div>
+        <div class="road-item"><span style="color:var(--gold);flex-shrink:0">○</span>Validação server-side de todos os campos (NIF, IBAN MOD-97, email)</div>
+        <div class="road-item"><span style="color:var(--gold);flex-shrink:0">○</span>Referência interna sequencial gerada no servidor</div>
+      </div>
+
+      <div class="road-group">
+        <div class="road-label"><div class="road-dot" style="background:var(--text3)"></div><span class="road-priority" style="color:var(--text3)">Baixa prioridade</span></div>
+        <div class="road-item"><span style="color:var(--text3);flex-shrink:0">○</span>Link partilhável com referência pré-preenchida (<code>?ref=ALG-2026-001</code>)</div>
+        <div class="road-item"><span style="color:var(--text3);flex-shrink:0">○</span>Suporte dinâmico para múltiplos proponentes (Pessoa Singular)</div>
+        <div class="road-item"><span style="color:var(--text3);flex-shrink:0">○</span>Assinatura digital integrada (DocuSign / AdobeSign)</div>
+        <div class="road-item"><span style="color:var(--text3);flex-shrink:0">○</span>Geração PDF server-side (Puppeteer / WeasyPrint)</div>
+      </div>
+    </div>
+
+    <!-- ENDPOINTS -->
+    <div class="page" id="page-endpoints">
+      <div class="page-title">Endpoints API</div>
+      <p class="body-text">Stack recomendada: Node.js/Express ou Python/FastAPI. Base URL: <code style="color:var(--gold)">https://api.algebracapital.pt/api/v1</code></p>
+
+      <div class="endpoint">
+        <div class="endpoint-hdr"><span class="method post">POST</span><code class="endpoint-path">/kyc/submit</code></div>
+        <div class="endpoint-body">
+          <p class="endpoint-desc">Recebe o formulário KYC completo. Valida server-side, guarda na BD, dispara emails automáticos. Suporta Singular e Coletiva.</p>
+          <div class="sub-label">Body (multipart/form-data)</div>
+          <div class="param-row"><code class="param-name">_type</code><span class="param-type">string</span><span class="param-desc">'singular' | 'coletiva'</span></div>
+          <div class="param-row"><code class="param-name">_lang</code><span class="param-type">string</span><span class="param-desc">'pt' | 'en'</span></div>
+          <div class="param-row"><code class="param-name">_modo</code><span class="param-type">string</span><span class="param-desc">'interno' | 'cliente'</span></div>
+          <div class="param-row"><code class="param-name">ref_interna</code><span class="param-type">string</span><span class="param-desc">ALG-YYYY-XXXX — enviada pelo frontend (localStorage)</span></div>
+          <div class="param-row"><code class="param-name">pep_flag</code><span class="param-type">boolean</span><span class="param-desc">True se qualquer questão PeP = Sim (calculado no frontend)</span></div>
+          <div class="param-row"><code class="param-name">[campos]</code><span class="param-type">string/date</span><span class="param-desc">Todos os campos do formulário — ver secção "Campos do Formulário"</span></div>
+          <div class="param-row"><code class="param-name">file_*</code><span class="param-type">file[]</span><span class="param-desc">Ficheiros carregados — PDF, JPG, PNG. Máx. 10MB cada.</span></div>
+          <div class="sub-label">Response 200</div>
+          <div class="param-row"><code class="resp-name">status</code><span class="param-desc">'ok'</span></div>
+          <div class="param-row"><code class="resp-name">ref</code><span class="param-desc">'ALG-2026-4823'</span></div>
+          <div class="param-row"><code class="resp-name">id</code><span class="param-desc">UUID da submissão</span></div>
+          <div class="param-row"><code class="resp-name">created_at</code><span class="param-desc">ISO 8601 timestamp</span></div>
+          <div class="sub-label">Response 422</div>
+          <div class="param-row"><code class="resp-name">status</code><span class="param-desc">'error'</span></div>
+          <div class="param-row"><code class="resp-name">code</code><span class="param-desc">'VALIDATION_FAILED'</span></div>
+          <div class="param-row"><code class="resp-name">fields</code><span class="param-desc">Array de campos em falta ou inválidos</span></div>
+        </div>
+      </div>
+
+      <div class="endpoint">
+        <div class="endpoint-hdr"><span class="method post">POST</span><code class="endpoint-path">/kyc/upload</code></div>
+        <div class="endpoint-body">
+          <p class="endpoint-desc">Upload individual de documento. Retorna URL de armazenamento. Aceite antes ou durante a submissão.</p>
+          <div class="sub-label">Body (multipart/form-data)</div>
+          <div class="param-row"><code class="param-name">file</code><span class="param-type">file</span><span class="param-desc">PDF, JPG ou PNG. Máximo 10MB.</span></div>
+          <div class="param-row"><code class="param-name">doc_type</code><span class="param-type">string</span><span class="param-desc">Singular: f1–f6 / Coletiva: cc1–cc5 / Fundos: g1–g6 / Assinatura: sign_1, sign_2</span></div>
+          <div class="param-row"><code class="param-name">ref_interna</code><span class="param-type">string</span><span class="param-desc">Para associar o ficheiro ao processo</span></div>
+          <div class="sub-label">Response 200</div>
+          <div class="param-row"><code class="resp-name">file_id</code><span class="param-desc">UUID v4</span></div>
+          <div class="param-row"><code class="resp-name">storage_key</code><span class="param-desc">Caminho no S3/Cloudinary</span></div>
+          <div class="param-row"><code class="resp-name">doc_type</code><span class="param-desc">Chave do documento</span></div>
+        </div>
+      </div>
+
+      <div class="endpoint">
+        <div class="endpoint-hdr"><span class="method get">GET</span><code class="endpoint-path">/kyc/:ref</code></div>
+        <div class="endpoint-body">
+          <p class="endpoint-desc">Detalhe completo de uma submissão. Requer <code style="color:var(--gold)">Authorization: Bearer {token}</code>.</p>
+          <div class="sub-label">Response 200</div>
+          <div class="param-row"><code class="resp-name">form_data</code><span class="param-desc">Objecto completo com todos os campos</span></div>
+          <div class="param-row"><code class="resp-name">titulares</code><span class="param-desc">Array de titulares (apenas coletiva)</span></div>
+          <div class="param-row"><code class="resp-name">pep_flag</code><span class="param-desc">Boolean</span></div>
+          <div class="param-row"><code class="resp-name">documents</code><span class="param-desc">Array com metadados e pre-signed URLs (expiração 15min)</span></div>
+          <div class="param-row"><code class="resp-name">status</code><span class="param-desc">'rascunho' | 'submetido' | 'em_analise' | 'aprovado' | 'rejeitado'</span></div>
+        </div>
+      </div>
+
+      <div class="endpoint">
+        <div class="endpoint-hdr"><span class="method get">GET</span><code class="endpoint-path">/admin/submissions</code></div>
+        <div class="endpoint-body">
+          <p class="endpoint-desc">Lista paginada de submissões. Requer token de admin.</p>
+          <div class="sub-label">Query Params</div>
+          <div class="param-row"><code class="param-name">page</code><span class="param-type">int</span><span class="param-desc">Página (default: 1)</span></div>
+          <div class="param-row"><code class="param-name">per_page</code><span class="param-type">int</span><span class="param-desc">Por página (default: 20)</span></div>
+          <div class="param-row"><code class="param-name">tipo</code><span class="param-type">string</span><span class="param-desc">'singular' | 'coletiva'</span></div>
+          <div class="param-row"><code class="param-name">pep_flag</code><span class="param-type">boolean</span><span class="param-desc">Filtrar submissões com PeP = Sim</span></div>
+          <div class="param-row"><code class="param-name">status</code><span class="param-type">string</span><span class="param-desc">'rascunho' | 'submetido' | 'em_analise' | 'aprovado' | 'rejeitado'</span></div>
+        </div>
+      </div>
+
+      <div class="endpoint">
+        <div class="endpoint-hdr"><span class="method post">POST</span><code class="endpoint-path">/cmd/verify</code></div>
+        <div class="endpoint-body">
+          <p class="endpoint-desc">Troca o authorization code CMD por token. Ver secção "Integração CMD" para fluxo completo.</p>
+          <div class="sub-label">Body (JSON)</div>
+          <div class="param-row"><code class="param-name">code</code><span class="param-type">string</span><span class="param-desc">Authorization code recebido do gov.pt</span></div>
+          <div class="param-row"><code class="param-name">redirect_uri</code><span class="param-type">string</span><span class="param-desc">Deve coincidir com o registado na AMA</span></div>
+          <div class="param-row"><code class="param-name">proponente</code><span class="param-type">int</span><span class="param-desc">1 ou 2</span></div>
+          <div class="sub-label">Response 200</div>
+          <div class="param-row"><code class="resp-name">status</code><span class="param-desc">'authenticated'</span></div>
+          <div class="param-row"><code class="resp-name">name</code><span class="param-desc">Nome completo (do id_token)</span></div>
+          <div class="param-row"><code class="resp-name">nif</code><span class="param-desc">NIF (do id_token)</span></div>
+          <div class="param-row"><code class="resp-name">token</code><span class="param-desc">JWT interno para incluir na submissão</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAMPOS -->
+    <div class="page" id="page-fields">
+      <div class="page-title">Campos do Formulário</div>
+      <p class="body-text">Mapeamento completo dos campos enviados no <code style="color:var(--gold)">POST /kyc/submit</code>.</p>
+
+      <div class="sec-title">Secção A — Negócio</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl"><code>a_proposito</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>a_descritivo</code></span><span class="row-val">string · Opcional</span></div>
+        <div class="row"><span class="row-lbl"><code>a_montante</code></span><span class="row-val">string (decimal) · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>a_sinal</code></span><span class="row-val">string (decimal) · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>a_origem_fundos</code></span><span class="row-val">string · Próprios | Financiamento | Mistos</span></div>
+        <div class="row"><span class="row-lbl"><code>a_fin_pct</code></span><span class="row-val">string · Opcional</span></div>
+        <div class="row"><span class="row-lbl"><code>a_cheque_iban</code></span><span class="row-val">string (IBAN PT50) · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>a_transf_iban</code></span><span class="row-val">string (IBAN PT50) · Obrigatório</span></div>
+      </div>
+
+      <div class="sec-title">Secção B — Proponente Singular</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl"><code>c1_nome</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_nasc</code></span><span class="row-val">date (YYYY-MM-DD) · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_nat</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_nac</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_docnum</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_emissao</code></span><span class="row-val">date · Opcional</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_entidade</code></span><span class="row-val">string (IRN | AIMA | outro) · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_validade</code></span><span class="row-val">date · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_nif</code></span><span class="row-val">string (9 dígitos) · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_nif_est</code></span><span class="row-val">string · Opcional</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_res1</code></span><span class="row-val">string (morada) · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_res1b</code></span><span class="row-val">string (país) · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_resf</code> / <code>c1_resf_pais</code></span><span class="row-val">string · Opcional (residência fiscal se diferente)</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_prof</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_patr</code></span><span class="row-val">string · Opcional</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_tel</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_email</code></span><span class="row-val">email · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>c1_be</code></span><span class="row-val">string · Opcional (beneficiário efetivo)</span></div>
+        <div class="row"><span class="row-lbl"><code>conj_*</code></span><span class="row-val">Campos do cônjuge — activos apenas se cônjuge = Sim</span></div>
+      </div>
+
+      <div class="sec-title">Secção B — Proponente Coletivo</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl"><code>cc_denom</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>cc_nipc</code></span><span class="row-val">string (9 dígitos) · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>cc_cae</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>cc_objeto</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>cc_sede</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>cc_forma</code></span><span class="row-val">string (Lda, SA, SPA…) · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>cc_marca</code></span><span class="row-val">string · Opcional</span></div>
+        <div class="row"><span class="row-lbl"><code>cc_data_const</code></span><span class="row-val">date · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>cc_pais_const</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>cc_sucursais</code></span><span class="row-val">string · Opcional</span></div>
+        <div class="row"><span class="row-lbl"><code>cc_rcbe</code></span><span class="row-val">string (RCBE-XXXXXX) · Opcional</span></div>
+        <div class="row"><span class="row-lbl"><code>cc_resp_nome</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>cc_resp_tel</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>cc_resp_email</code></span><span class="row-val">email · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>tit_N_*</code></span><span class="row-val">Campos de cada titular (N = 1, 2, 3…) — nome, cargo, capital, nif, residência</span></div>
+      </div>
+
+      <div class="sec-title">PeP &amp; Assinaturas</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl"><code>p1_resposta … p4_resposta</code></span><span class="row-val">boolean — Sim/Não para cada questão PeP</span></div>
+        <div class="row"><span class="row-lbl"><code>p1_int, p1_cargo, p1_pais, p1_desde, p1_ate</code></span><span class="row-val">Obrigatórios se p1_resposta = Sim (idem p2, p3, p4)</span></div>
+        <div class="row"><span class="row-lbl"><code>h1_nome</code></span><span class="row-val">string · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>h1_data</code></span><span class="row-val">date · Obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>h1_local</code></span><span class="row-val">string · Opcional</span></div>
+        <div class="row"><span class="row-lbl"><code>h2_nome, h2_data, h2_local</code></span><span class="row-val">Proponente 2 / Rep. Legal — Opcional</span></div>
+        <div class="row"><span class="row-lbl"><code>cmd_auth_1, cmd_auth_2</code></span><span class="row-val">JWT CMD — incluído se autenticação CMD concluída</span></div>
+      </div>
+
+      <div class="sec-title">Ficheiros (multipart)</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl"><code>file_f1</code></span><span class="row-val">Doc. identificação intervenientes · Obrigatório (Singular)</span></div>
+        <div class="row"><span class="row-lbl"><code>file_f2</code></span><span class="row-val">Comprovativo NIF · Obrigatório (Singular)</span></div>
+        <div class="row"><span class="row-lbl"><code>file_f3</code></span><span class="row-val">Procuração · Opcional</span></div>
+        <div class="row"><span class="row-lbl"><code>file_f4</code></span><span class="row-val">Fatura serviço público · Obrigatório (Singular)</span></div>
+        <div class="row"><span class="row-lbl"><code>file_f5</code></span><span class="row-val">Recibo vencimento / declaração · Obrigatório (Singular)</span></div>
+        <div class="row"><span class="row-lbl"><code>file_f6</code></span><span class="row-val">Comprovativo IBAN · Obrigatório (Singular)</span></div>
+        <div class="row"><span class="row-lbl"><code>file_cc1</code></span><span class="row-val">Certidão RC + RCBE · Obrigatório (Coletiva)</span></div>
+        <div class="row"><span class="row-lbl"><code>file_cc2</code></span><span class="row-val">Doc. identificação titulares · Obrigatório (Coletiva)</span></div>
+        <div class="row"><span class="row-lbl"><code>file_cc3</code></span><span class="row-val">Comprovativo NIF empresa · Opcional</span></div>
+        <div class="row"><span class="row-lbl"><code>file_cc4</code></span><span class="row-val">Deliberação AG / Procuração · Opcional</span></div>
+        <div class="row"><span class="row-lbl"><code>file_cc5</code></span><span class="row-val">Comprovativo IBAN empresa · Obrigatório (Coletiva)</span></div>
+        <div class="row"><span class="row-lbl"><code>file_g1 … file_g6</code></span><span class="row-val">Comprovativos origem de fundos · Pelo menos 1 obrigatório</span></div>
+        <div class="row"><span class="row-lbl"><code>file_sign_1, file_sign_2</code></span><span class="row-val">Assinaturas físicas digitalizadas · Opcional</span></div>
+      </div>
+    </div>
+
+    <!-- BASE DE DADOS -->
+    <div class="page" id="page-database">
+      <div class="page-title">Base de Dados</div>
+      <p class="body-text">PostgreSQL 15+ — 4 tabelas principais. O campo <code style="color:var(--gold)">ref_interna</code> é fornecido pelo frontend (localStorage) ou gerado pelo servidor se ausente.</p>
+
+      <div class="db-table">
+        <div style="display:flex;align-items:center;margin-bottom:10px"><code class="db-name">kyc_submissions</code><span class="db-desc">Registo principal de cada submissão.</span></div>
+        <div class="db-grid">
+          <div class="db-head"><span>Coluna</span><span>Tipo</span><span>Descrição</span></div>
+          <div class="db-row pk"><code class="db-col pk">id 🔑</code><code class="db-type">UUID</code><span class="db-desc-cell">Primary key — gen_random_uuid()</span></div>
+          <div class="db-row"><code class="db-col">ref_interna</code><code class="db-type">VARCHAR(20)</code><span class="db-desc-cell">ALG-YYYY-XXXX — UNIQUE NOT NULL</span></div>
+          <div class="db-row"><code class="db-col">tipo</code><code class="db-type">VARCHAR(10)</code><span class="db-desc-cell">'singular' | 'coletiva'</span></div>
+          <div class="db-row"><code class="db-col">status</code><code class="db-type">VARCHAR(20)</code><span class="db-desc-cell">'rascunho' | 'submetido' | 'em_analise' | 'aprovado' | 'rejeitado'</span></div>
+          <div class="db-row"><code class="db-col">lang</code><code class="db-type">VARCHAR(2)</code><span class="db-desc-cell">'pt' | 'en'</span></div>
+          <div class="db-row"><code class="db-col">modo_submissao</code><code class="db-type">VARCHAR(10)</code><span class="db-desc-cell">'interno' | 'cliente'</span></div>
+          <div class="db-row"><code class="db-col">pep_flag</code><code class="db-type">BOOLEAN</code><span class="db-desc-cell">True se qualquer questão PeP = Sim</span></div>
+          <div class="db-row"><code class="db-col">payload_json</code><code class="db-type">JSONB</code><span class="db-desc-cell">Payload completo — cifrado em repouso (AES-256)</span></div>
+          <div class="db-row"><code class="db-col">ip_address</code><code class="db-type">INET</code><span class="db-desc-cell">IP do cliente — anonimizar após 30 dias (RGPD)</span></div>
+          <div class="db-row"><code class="db-col">created_at</code><code class="db-type">TIMESTAMPTZ</code><span class="db-desc-cell">Data de criação</span></div>
+          <div class="db-row"><code class="db-col">submitted_at</code><code class="db-type">TIMESTAMPTZ</code><span class="db-desc-cell">Data de submissão final</span></div>
+          <div class="db-row"><code class="db-col">reviewed_by</code><code class="db-type">UUID</code><span class="db-desc-cell">FK → users.id</span></div>
+          <div class="db-row"><code class="db-col">notes</code><code class="db-type">TEXT</code><span class="db-desc-cell">Notas internas</span></div>
+        </div>
+      </div>
+
+      <div class="db-table">
+        <div style="display:flex;align-items:center;margin-bottom:10px"><code class="db-name">kyc_titulares</code><span class="db-desc">Titulares de Pessoa Coletiva (1 linha por titular).</span></div>
+        <div class="db-grid">
+          <div class="db-head"><span>Coluna</span><span>Tipo</span><span>Descrição</span></div>
+          <div class="db-row pk"><code class="db-col pk">id 🔑</code><code class="db-type">UUID</code><span class="db-desc-cell">Primary key</span></div>
+          <div class="db-row"><code class="db-col">submission_id</code><code class="db-type">UUID</code><span class="db-desc-cell">FK → kyc_submissions.id ON DELETE CASCADE</span></div>
+          <div class="db-row"><code class="db-col">ordem</code><code class="db-type">INTEGER</code><span class="db-desc-cell">Ordem de adição (1, 2, 3…)</span></div>
+          <div class="db-row"><code class="db-col">nome</code><code class="db-type">VARCHAR(200)</code><span class="db-desc-cell">Nome completo</span></div>
+          <div class="db-row"><code class="db-col">cargo</code><code class="db-type">VARCHAR(100)</code><span class="db-desc-cell">Cargo / função</span></div>
+          <div class="db-row"><code class="db-col">capital_pct</code><code class="db-type">NUMERIC(5,2)</code><span class="db-desc-cell">% capital detido</span></div>
+          <div class="db-row"><code class="db-col">beneficiario_efetivo</code><code class="db-type">BOOLEAN</code><span class="db-desc-cell">True se BE = Sim</span></div>
+          <div class="db-row"><code class="db-col">nif</code><code class="db-type">VARCHAR(9)</code><span class="db-desc-cell">NIF nacional</span></div>
+          <div class="db-row"><code class="db-col">data</code><code class="db-type">JSONB</code><span class="db-desc-cell">Restantes campos (doc., residência, nac., etc.)</span></div>
+        </div>
+      </div>
+
+      <div class="db-table">
+        <div style="display:flex;align-items:center;margin-bottom:10px"><code class="db-name">kyc_documents</code><span class="db-desc">Metadados dos documentos carregados.</span></div>
+        <div class="db-grid">
+          <div class="db-head"><span>Coluna</span><span>Tipo</span><span>Descrição</span></div>
+          <div class="db-row pk"><code class="db-col pk">id 🔑</code><code class="db-type">UUID</code><span class="db-desc-cell">Primary key</span></div>
+          <div class="db-row"><code class="db-col">submission_id</code><code class="db-type">UUID</code><span class="db-desc-cell">FK → kyc_submissions.id ON DELETE CASCADE</span></div>
+          <div class="db-row"><code class="db-col">doc_type</code><code class="db-type">VARCHAR(10)</code><span class="db-desc-cell">f1–f6, cc1–cc5, g1–g6, sign_1, sign_2</span></div>
+          <div class="db-row"><code class="db-col">filename</code><code class="db-type">VARCHAR(255)</code><span class="db-desc-cell">Nome original do ficheiro</span></div>
+          <div class="db-row"><code class="db-col">storage_key</code><code class="db-type">TEXT</code><span class="db-desc-cell">Caminho no S3/Cloudinary</span></div>
+          <div class="db-row"><code class="db-col">mime_type</code><code class="db-type">VARCHAR(50)</code><span class="db-desc-cell">'application/pdf', 'image/jpeg', 'image/png'</span></div>
+          <div class="db-row"><code class="db-col">size_bytes</code><code class="db-type">INTEGER</code><span class="db-desc-cell">Tamanho em bytes</span></div>
+          <div class="db-row"><code class="db-col">uploaded_at</code><code class="db-type">TIMESTAMPTZ</code><span class="db-desc-cell">Data de upload</span></div>
+        </div>
+      </div>
+
+      <div class="db-table">
+        <div style="display:flex;align-items:center;margin-bottom:10px"><code class="db-name">kyc_audit_log</code><span class="db-desc">Log de todas as acções (RGPD + AML compliance).</span></div>
+        <div class="db-grid">
+          <div class="db-head"><span>Coluna</span><span>Tipo</span><span>Descrição</span></div>
+          <div class="db-row pk"><code class="db-col pk">id 🔑</code><code class="db-type">UUID</code><span class="db-desc-cell">Primary key</span></div>
+          <div class="db-row"><code class="db-col">submission_id</code><code class="db-type">UUID</code><span class="db-desc-cell">FK → kyc_submissions.id</span></div>
+          <div class="db-row"><code class="db-col">action</code><code class="db-type">VARCHAR(50)</code><span class="db-desc-cell">'created' | 'updated' | 'viewed' | 'exported' | 'status_changed'</span></div>
+          <div class="db-row"><code class="db-col">actor</code><code class="db-type">TEXT</code><span class="db-desc-cell">Email do admin ou 'client'</span></div>
+          <div class="db-row"><code class="db-col">ip</code><code class="db-type">INET</code><span class="db-desc-cell">IP de origem</span></div>
+          <div class="db-row"><code class="db-col">meta</code><code class="db-type">JSONB</code><span class="db-desc-cell">Dados adicionais (status anterior/novo, modo, lang)</span></div>
+          <div class="db-row"><code class="db-col">timestamp</code><code class="db-type">TIMESTAMPTZ</code><span class="db-desc-cell">Data e hora da acção</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FICHEIROS -->
+    <div class="page" id="page-files">
+      <div class="page-title">Upload de Ficheiros</div>
+
+      <div class="sec-title">Requisitos</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">Formatos aceites</span><span class="row-val">PDF, JPG, JPEG, PNG</span></div>
+        <div class="row"><span class="row-lbl">Tamanho máximo por ficheiro</span><span class="row-val">10 MB</span></div>
+        <div class="row"><span class="row-lbl">Tamanho máximo total</span><span class="row-val">100 MB por submissão</span></div>
+        <div class="row"><span class="row-lbl">Múltiplos ficheiros</span><span class="row-val">Permitidos por campo (ex: vários documentos de identificação)</span></div>
+      </div>
+
+      <div class="sec-title">Estrutura de Paths no Armazenamento</div>
+      <div class="arch-block">kyc/{ano}/{ref_interna}/{doc_type}/{uuid}_{filename}
+
+Exemplo:
+kyc/2026/ALG-2026-4823/f1/a1b2c3d4_passaporte_joao.pdf
+kyc/2026/ALG-2026-4823/g3/b2c3d4e5_extrato_bancario.pdf</div>
+
+      <div class="sec-title">Segurança</div>
+      <div class="note err"><span class="note-icon">✕</span>Os ficheiros <strong>nunca devem ser acessíveis publicamente</strong> por URL directa.</div>
+      <div class="note info"><span class="note-icon">ℹ</span>O acesso deve ser feito via <strong>pre-signed URLs</strong> com expiração máxima de 15 minutos.</div>
+      <div class="note warn"><span class="note-icon">⚠</span>O backend deve <strong>re-validar o tipo MIME</strong> do ficheiro recebido — não confiar no <code>Content-Type</code> do cliente. Recomenda-se análise antivírus (ex: ClamAV) antes de persistir.</div>
+    </div>
+
+    <!-- SEGURANÇA -->
+    <div class="page" id="page-security">
+      <div class="page-title">Segurança &amp; Compliance</div>
+
+      <div class="sec-title">Transmissão</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">Protocolo</span><span class="row-val">HTTPS obrigatório — TLS 1.2+</span></div>
+        <div class="row"><span class="row-lbl">Certificado</span><span class="row-val">Válido, emitido por CA reconhecida (Let's Encrypt aceite)</span></div>
+        <div class="row"><span class="row-lbl">HSTS</span><span class="row-val">Recomendado — <code>Strict-Transport-Security: max-age=31536000</code></span></div>
+      </div>
+
+      <div class="sec-title">Autenticação do Modo Interno</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">Mecanismo</span><span class="row-val">JWT (HS256 ou RS256) — <code>Authorization: Bearer &lt;jwt&gt;</code></span></div>
+        <div class="row"><span class="row-lbl">Payload</span><span class="row-val"><code>sub</code> (user ID), <code>role</code> ('interno'), <code>exp</code> (expiração)</span></div>
+        <div class="row"><span class="row-lbl">Expiração</span><span class="row-val">8 horas — renovar com refresh token</span></div>
+      </div>
+
+      <div class="sec-title">RGPD &amp; AML</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">Cifra em repouso</span><span class="row-val"><code>payload_json</code> cifrado com AES-256 na base de dados</span></div>
+        <div class="row"><span class="row-lbl">Retenção de logs</span><span class="row-val">Mínimo 5 anos (AML) — configurável via <code>DATA_RETENTION_YEARS</code></span></div>
+        <div class="row"><span class="row-lbl">Anonimização de IP</span><span class="row-val">Após 30 dias — configurável via <code>IP_ANONYMIZE_DAYS</code></span></div>
+        <div class="row"><span class="row-lbl">Auditoria</span><span class="row-val">Tabela <code>kyc_audit_log</code> regista todas as acções com actor, IP e timestamp</span></div>
+        <div class="row"><span class="row-lbl">DPO</span><span class="row-val"><code>dataprotection@algebracapital.pt</code></span></div>
+      </div>
+
+      <div class="sec-title">Validação Server-Side Obrigatória</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">NIF</span><span class="row-val">9 dígitos + algoritmo de dígito de controlo</span></div>
+        <div class="row"><span class="row-lbl">IBAN</span><span class="row-val">Algoritmo MOD-97 — formato PT50 + 21 dígitos</span></div>
+        <div class="row"><span class="row-lbl">Email</span><span class="row-val">RFC 5322 — validação de formato + MX record opcional</span></div>
+        <div class="row"><span class="row-lbl">Datas</span><span class="row-val"><code>nasc</code> &lt; hoje; <code>validade</code> &gt; hoje</span></div>
+        <div class="row"><span class="row-lbl">MIME type</span><span class="row-val">Re-validar ficheiros enviados (não confiar no Content-Type)</span></div>
+      </div>
+
+      <div class="sec-title">Checklist Pré-Produção</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">☐</span><span class="row-val">Certificado TLS válido configurado</span></div>
+        <div class="row"><span class="row-lbl">☐</span><span class="row-val">Variáveis de ambiente de produção definidas (sem valores de desenvolvimento)</span></div>
+        <div class="row"><span class="row-lbl">☐</span><span class="row-val">Base de dados com backups automáticos (RPO ≤ 24h)</span></div>
+        <div class="row"><span class="row-lbl">☐</span><span class="row-val">Credenciais CMD registadas na AMA para o domínio de produção</span></div>
+        <div class="row"><span class="row-lbl">☐</span><span class="row-val">Política de retenção de ficheiros no S3 (mín. 5 anos — AML)</span></div>
+        <div class="row"><span class="row-lbl">☐</span><span class="row-val">Notificações de nova submissão configuradas para compliance@algebracapital.pt</span></div>
+        <div class="row"><span class="row-lbl">☐</span><span class="row-val">Logs de auditoria activos e centralizados</span></div>
+        <div class="row"><span class="row-lbl">☐</span><span class="row-val">Testes de penetração realizados antes do go-live</span></div>
+        <div class="row"><span class="row-lbl">☐</span><span class="row-val">DPO notificado e registo de tratamento de dados actualizado (RGPD art. 30.º)</span></div>
+      </div>
+    </div>
+
+    <!-- CMD -->
+    <div class="page" id="page-cmd">
+      <div class="page-title">Integração CMD</div>
+      <p class="body-text">A autenticação CMD utiliza o protocolo <strong>OAuth 2.0 com OpenID Connect</strong> disponibilizado pela AMA (Agência para a Modernização Administrativa).</p>
+
+      <div class="sec-title">Fluxo de Autenticação</div>
+      <div class="arch-block">1. Frontend abre popup:
+   https://autenticacao.gov.pt/oauth/authorize
+   ?client_id=&lt;CLIENT_ID&gt;
+   &amp;redirect_uri=https://kyc.algebracapital.pt/cmd/callback
+   &amp;response_type=code
+   &amp;scope=openid%20profile%20nic
+   &amp;state=&lt;state_aleatorio&gt;
+
+2. Utilizador autentica-se no portal gov.pt
+
+3. Gov.pt redirige para o callback com ?code=&lt;code&gt;&amp;state=&lt;state&gt;
+
+4. Frontend envia o code para POST /api/cmd/verify
+
+5. Backend troca o code por access_token:
+   POST https://autenticacao.gov.pt/oauth/token
+   grant_type=authorization_code
+   &amp;code=&lt;code&gt;
+   &amp;redirect_uri=...
+   &amp;client_id=...
+   &amp;client_secret=...
+
+6. Backend valida o id_token (JWT), extrai NIF e nome
+
+7. Backend devolve JWT interno ao frontend
+
+8. Frontend regista autenticação — proponente marcado como autenticado</div>
+
+      <div class="sec-title">Estado Actual vs. Produção</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">Estado actual</span><span class="row-val">Simulado — abre portal gov.pt em nova aba e confirma localmente com botão</span></div>
+        <div class="row"><span class="row-lbl">Para produção</span><span class="row-val">Implementar fluxo OAuth completo com endpoint <code>/cmd/verify</code> no backend</span></div>
+        <div class="row"><span class="row-lbl">Registo na AMA</span><span class="row-val">Necessário registar aplicação em <a href="https://www.autenticacao.gov.pt" style="color:var(--gold)">autenticacao.gov.pt</a> para obter CLIENT_ID e CLIENT_SECRET</span></div>
+      </div>
+
+      <div class="note warn"><span class="note-icon">⚠</span>Guardar <code>CMD_CLIENT_SECRET</code> apenas no servidor — nunca expor no frontend.</div>
+    </div>
+
+    <!-- EMAILS -->
+    <div class="page" id="page-emails">
+      <div class="page-title">Emails Automáticos</div>
+      <p class="body-text">Dois emails disparados via SendGrid após cada submissão bem-sucedida.</p>
+
+      <div class="email-card">
+        <div class="email-hdr">
+          <div class="email-title">Email de Confirmação — Cliente</div>
+          <div class="email-to">Para: <span>c1_email (Singular) ou cc_resp_email (Coletiva)</span></div>
+        </div>
+        <div class="email-body">
+          <div class="card" style="margin-bottom:14px">
+            <div class="row"><span class="row-lbl">Trigger</span><span class="row-val"><code>POST /api/kyc/submit</code> com sucesso</span></div>
+            <div class="row"><span class="row-lbl">Subject</span><span class="row-val">[Algebra Capital] Confirmação KYC — {ref_interna}</span></div>
+          </div>
+          <div class="sub-label">Conteúdo</div>
+          <div class="email-item">Saudação com nome do proponente (c1_nome) ou denominação social (cc_denom)</div>
+          <div class="email-item">Referência do processo (ref_interna)</div>
+          <div class="email-item">Lista dos documentos recebidos com sucesso</div>
+          <div class="email-item">Indicação de documentos em falta (se aplicável)</div>
+          <div class="email-item">Contacto da equipa Algebra Capital</div>
+          <div class="email-item">Nota de confidencialidade, RGPD e contacto do DPO (dataprotection@algebracapital.pt)</div>
+          <div class="note info" style="margin-top:12px"><span class="note-icon">ℹ</span>Enviar em PT ou EN conforme o campo <code style="color:var(--gold)">_lang</code> da submissão.</div>
+        </div>
+      </div>
+
+      <div class="email-card">
+        <div class="email-hdr">
+          <div class="email-title">Email de Notificação — Equipa Algebra Capital</div>
+          <div class="email-to">Para: <span>NOTIFY_EMAIL (variável de ambiente)</span></div>
+        </div>
+        <div class="email-body">
+          <div class="card" style="margin-bottom:14px">
+            <div class="row"><span class="row-lbl">Trigger</span><span class="row-val"><code>POST /api/kyc/submit</code> com sucesso</span></div>
+            <div class="row"><span class="row-lbl">Subject (normal)</span><span class="row-val">[KYC] Nova submissão — {ref_interna} — {nome}</span></div>
+            <div class="row"><span class="row-lbl">Subject (PeP)</span><span class="row-val">🔴 [KYC · PEP ALERT] — {ref_interna} — {nome}</span></div>
+          </div>
+          <div class="sub-label">Conteúdo</div>
+          <div class="email-item">Tipo de proponente (Singular / Coletiva)</div>
+          <div class="email-item">Referência interna e timestamp da submissão</div>
+          <div class="email-item">Nome/denominação e contacto do proponente</div>
+          <div class="email-item">Montante e sinal da operação</div>
+          <div class="email-item">Links directos para cada documento (pre-signed URLs)</div>
+          <div class="email-item">Lista de documentos em falta</div>
+          <div class="email-item">Lista de titulares (apenas Coletiva)</div>
+          <div class="email-item">Link para o painel de administração</div>
+          <div class="note warn" style="margin-top:12px"><span class="note-icon">⚠</span>Incluir bloco de alerta destacado se <code>pep_flag = true</code>. Indicar qual(is) das 4 questões foi(ram) respondida(s) com Sim, os dados do interveniente, cargo e país.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENV -->
+    <div class="page" id="page-env">
+      <div class="page-title">Variáveis de Ambiente</div>
+      <p class="body-text">Ficheiro <code style="color:var(--gold)">.env</code> na raiz do projecto backend. Nunca commitar — adicionar ao <code style="color:var(--gold)">.gitignore</code>.</p>
+      <div class="env-block">
+<div class="env-comment"># Aplicação</div>
+<div><span class="env-key">NODE_ENV</span><span class="env-eq">=</span><span class="env-val">production</span></div>
+<div><span class="env-key">PORT</span><span class="env-eq">=</span><span class="env-val">3000</span></div>
+<div><span class="env-key">BASE_URL</span><span class="env-eq">=</span><span class="env-val">https://kyc.algebracapital.pt</span></div>
+
+<div class="env-comment"># Base de dados</div>
+<div><span class="env-key">DATABASE_URL</span><span class="env-eq">=</span><span class="env-val">postgresql://user:password@host:5432/kyc_db</span></div>
+<div><span class="env-key">DATABASE_SSL</span><span class="env-eq">=</span><span class="env-val">true</span></div>
+
+<div class="env-comment"># JWT</div>
+<div><span class="env-key">JWT_SECRET</span><span class="env-eq">=</span><span class="env-val">gerar: node -e "require('crypto').randomBytes(32).toString('hex')|print"</span></div>
+<div><span class="env-key">JWT_EXPIRY</span><span class="env-eq">=</span><span class="env-val">8h</span></div>
+
+<div class="env-comment"># Armazenamento de ficheiros</div>
+<div><span class="env-key">STORAGE_PROVIDER</span><span class="env-eq">=</span><span class="env-val">s3</span></div>
+<div><span class="env-key">S3_BUCKET</span><span class="env-eq">=</span><span class="env-val">algebra-kyc-docs</span></div>
+<div><span class="env-key">S3_REGION</span><span class="env-eq">=</span><span class="env-val">eu-west-1</span></div>
+<div><span class="env-key">AWS_ACCESS_KEY_ID</span><span class="env-eq">=</span><span class="env-val">AKIA...</span></div>
+<div><span class="env-key">AWS_SECRET_ACCESS_KEY</span><span class="env-eq">=</span><span class="env-val">...</span></div>
+
+<div class="env-comment"># CMD (Chave Móvel Digital)</div>
+<div><span class="env-key">CMD_CLIENT_ID</span><span class="env-eq">=</span><span class="env-val">&lt;registar em autenticacao.gov.pt&gt;</span></div>
+<div><span class="env-key">CMD_CLIENT_SECRET</span><span class="env-eq">=</span><span class="env-val">&lt;registar em autenticacao.gov.pt&gt;</span></div>
+<div><span class="env-key">CMD_REDIRECT_URI</span><span class="env-eq">=</span><span class="env-val">https://kyc.algebracapital.pt/cmd/callback</span></div>
+<div><span class="env-key">CMD_AUTH_URL</span><span class="env-eq">=</span><span class="env-val">https://autenticacao.gov.pt/oauth/authorize</span></div>
+<div><span class="env-key">CMD_TOKEN_URL</span><span class="env-eq">=</span><span class="env-val">https://autenticacao.gov.pt/oauth/token</span></div>
+
+<div class="env-comment"># Email (notificações)</div>
+<div><span class="env-key">SENDGRID_API_KEY</span><span class="env-eq">=</span><span class="env-val">SG.xxxxxxxxxxxxxxxxxxxx</span></div>
+<div><span class="env-key">EMAIL_FROM</span><span class="env-eq">=</span><span class="env-val">kyc@algebracapital.pt</span></div>
+<div><span class="env-key">NOTIFY_EMAIL</span><span class="env-eq">=</span><span class="env-val">compliance@algebracapital.pt</span></div>
+<div><span class="env-key">EMAIL_DPO</span><span class="env-eq">=</span><span class="env-val">dataprotection@algebracapital.pt</span></div>
+
+<div class="env-comment"># Cifra de dados em repouso</div>
+<div><span class="env-key">ENCRYPTION_KEY</span><span class="env-eq">=</span><span class="env-val">&lt;64 chars hex — AES-256&gt;</span></div>
+
+<div class="env-comment"># RGPD — retenção</div>
+<div><span class="env-key">IP_ANONYMIZE_DAYS</span><span class="env-eq">=</span><span class="env-val">30</span></div>
+<div><span class="env-key">DATA_RETENTION_YEARS</span><span class="env-eq">=</span><span class="env-val">7</span></div>
+
+<div class="env-comment"># CORS</div>
+<div><span class="env-key">ALLOWED_ORIGINS</span><span class="env-eq">=</span><span class="env-val">https://kyc.algebracapital.pt,https://algebracapital.pt</span></div>
+      </div>
+      <div class="note err"><span class="note-icon">✕</span>Nunca expor estas variáveis no frontend. Em produção usar variáveis de ambiente do servidor (Vercel Environment Variables, Railway, Heroku Config Vars, etc.).</div>
+      <div class="note warn"><span class="note-icon">⚠</span><code style="color:var(--gold)">DATA_RETENTION_YEARS=7</code> — prazo mínimo de conservação para dados AML/CFT conforme Lei n.º 83/2017, art. 51.º.</div>
+      <div class="note warn"><span class="note-icon">⚠</span><code style="color:var(--gold)">CMD_CLIENT_SECRET</code> — nunca expor no frontend. Guardar exclusivamente no servidor.</div>
+    </div>
+
+    <!-- DEPLOY -->
+    <div class="page" id="page-deploy">
+      <div class="page-title">Deploy &amp; Setup</div>
+
+      <div class="sec-title">Pré-requisitos</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl">Node.js</span><span class="row-val">20+ (ou Python 3.12+)</span></div>
+        <div class="row"><span class="row-lbl">PostgreSQL</span><span class="row-val">15+</span></div>
+        <div class="row"><span class="row-lbl">Docker</span><span class="row-val">Docker + Docker Compose (recomendado)</span></div>
+        <div class="row"><span class="row-lbl">S3 / Cloudinary</span><span class="row-val">Bucket configurado na região EU (RGPD)</span></div>
+      </div>
+
+      <div class="sec-title">Instalação Local (desenvolvimento)</div>
+      <div class="arch-block"># Clonar repositório
+git clone https://github.com/algebracapital/kyc-form.git
+cd kyc-form
+
+# Instalar dependências
+npm install
+
+# Configurar variáveis de ambiente
+cp .env.example .env
+# Editar .env com credenciais locais
+
+# Criar base de dados e aplicar migrações
+npm run db:migrate
+
+# Iniciar servidor de desenvolvimento
+npm run dev
+# → http://localhost:3000</div>
+
+      <div class="sec-title">Deploy com Docker</div>
+      <div class="arch-block"># Build da imagem
+docker build -t algebra-kyc:latest .
+
+# Executar com docker-compose
+docker-compose up -d
+
+# Ver logs
+docker-compose logs -f app</div>
+
+      <div class="sec-title">docker-compose.yml</div>
+      <div class="arch-block">version: '3.9'
+services:
+  app:
+    image: algebra-kyc:latest
+    ports:
+      - "3000:3000"
+    env_file: .env
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: kyc_db
+      POSTGRES_USER: kyc_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs
+    depends_on:
+      - app
+    restart: unless-stopped
+
+volumes:
+  pgdata:</div>
+
+      <div class="sec-title">Comandos Úteis</div>
+      <div class="card">
+        <div class="row"><span class="row-lbl"><code>npm run db:migrate</code></span><span class="row-val">Aplicar migrações pendentes</span></div>
+        <div class="row"><span class="row-lbl"><code>npm run db:migrate:rollback</code></span><span class="row-val">Reverter última migração</span></div>
+        <div class="row"><span class="row-lbl"><code>npm test</code></span><span class="row-val">Testes unitários</span></div>
+        <div class="row"><span class="row-lbl"><code>npm run test:integration</code></span><span class="row-val">Testes de integração (requer DB e S3)</span></div>
+        <div class="row"><span class="row-lbl"><code>npm run test:coverage</code></span><span class="row-val">Relatório de cobertura</span></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.nav-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+  document.querySelector('.content').scrollTop = 0;
+}
+</script>
+</body>
+</html>
