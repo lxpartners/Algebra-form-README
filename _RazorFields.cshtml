@@ -1,0 +1,18 @@
+@* ── CAMPOS OCULTOS RAZOR — injectados pelo Controller ── *@
+@* Estes campos associam a submissão ao cliente correcto na plataforma *@
+<input type="hidden" id="kyc_client_id"  value="@Model.ClientId" />
+<input type="hidden" id="kyc_process_ref" value="@Model.RefInterna" />
+<input type="hidden" id="kyc_submit_url"  value="@Url.Action("Submit", "Kyc")" />
+@Html.AntiForgeryToken()
+
+@* ── FEEDBACK DE SUBMISSÃO ── *@
+<div class="kyc-success" id="kyc-success">
+    <h2>✓ Formulário submetido com sucesso</h2>
+    <p>Referência: <strong id="kyc-success-ref"></strong></p>
+</div>
+<div class="kyc-error" id="kyc-error"></div>
+
+@* ══════════════════════════════════════════════════════════════
+   A PARTIR DAQUI: conteúdo do index.html original (sem <html>,
+   <head>, <body>, <script src="jspdf">, sem o bloco <style>)
+   ══════════════════════════════════════════════════════════════ *@

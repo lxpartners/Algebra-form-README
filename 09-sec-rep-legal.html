@@ -1,0 +1,50 @@
+<!-- REPRESENTANTE LEGAL -->
+<div class="divider"></div>
+<div class="sec-title" id="d-title">Representante Legal</div>
+<div class="sec-sub" id="d-sub">Preencha apenas se existir representante legal.</div>
+<div class="yn">
+  <div class="yn-row">
+    <span class="yn-q" id="d-q">Existe Representante Legal?</span>
+    <div class="yn-btns">
+      <button class="yn-btn yes" onclick="ynToggle(this,'rep_det','yes')" id="yn-yes-rep">Sim</button>
+      <button class="yn-btn no" onclick="ynToggle(this,'rep_det','no')" id="yn-no-rep">Não</button>
+    </div>
+  </div>
+</div>
+<div id="rep_det" class="coll">
+  <div class="g2" style="gap:12px">
+    <div class="card" style="margin:0">
+      <div class="clbl">Dados Pessoais &amp; Identificação</div>
+      <div class="f" style="margin-bottom:10px"><label class="req">Nome Completo</label><input type="text" name="d_nome" data-req-pt="Nome Rep. Legal" data-req-en="Legal Rep. Name"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f" style="margin-bottom:10px"><label class="req">Data de Nascimento</label><input type="date" name="d_nasc" data-req-pt="Nasc. Rep. Legal" data-req-en="Legal Rep. DOB"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f" style="margin-bottom:10px"><label class="req">Naturalidade</label><input type="text" name="d_nat" data-req-pt="Naturalidade Rep. Legal" data-req-en="Legal Rep. Birth Place"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f" style="margin-bottom:10px"><label class="req">Nacionalidade</label><input type="text" name="d_nac" data-req-pt="Nacionalidade Rep. Legal" data-req-en="Legal Rep. Nationality"><span class="f-err">Campo obrigatório</span></div>
+      <div class="opts-col" id="drep-doc-opts" style="margin:8px 0 14px">
+        <div class="opt" onclick="toggleRad(this,'drep-doc-opts')"><div class="odot"></div>BI / Cartão de Cidadão</div>
+        <div class="opt" onclick="toggleRad(this,'drep-doc-opts')"><div class="odot"></div>Passaporte</div>
+        <div class="opt" onclick="toggleRad(this,'drep-doc-opts')"><div class="odot"></div>Título de Residência</div>
+        <div class="opt" onclick="toggleRad(this,'drep-doc-opts')"><div class="odot"></div>Outro</div>
+      </div>
+      <div class="f" style="margin-bottom:10px"><label class="req">N.º Documento</label><input type="text" name="d_docnum" data-req-pt="N.º Doc. Rep. Legal" data-req-en="Legal Rep. Doc No."><span class="f-err">Campo obrigatório</span></div>
+      <div class="f" style="margin-bottom:10px"><label>Data de Emissão</label><input type="date" name="d_emissao"></div>
+      <div class="f" style="margin-bottom:10px">
+        <label class="req">Entidade Emitente</label>
+        <select name="d_entidade" data-req-pt="Entidade Emitente Rep. Legal" data-req-en="Legal Rep. Issuing Auth." onchange="toggleIssuerOther(this,'d_entidade_outro')">
+          <option value="">-- Selecionar --</option><option>IRN</option><option>AIMA</option><option value="outro">Outra</option>
+        </select>
+        <span class="f-err">Campo obrigatório</span>
+        <div class="outro" id="d_entidade_outro"><input type="text" name="d_entidade_text" placeholder="Especifique..."></div>
+      </div>
+      <div class="f"><label class="req">Válido até</label><input type="date" name="d_validade" data-req-pt="Validade Rep. Legal" data-req-en="Legal Rep. Expiry"><span class="f-err">Campo obrigatório</span></div>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="clbl">Identificação Fiscal &amp; Residência &amp; Contacto</div>
+      <div class="f" style="margin-bottom:10px"><label class="req">NIF Nacional</label><input type="text" name="d_nif" data-req-pt="NIF Rep. Legal" data-req-en="Legal Rep. NIF"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f" style="margin-bottom:10px"><label>NIF Estrangeiro / País</label><input type="text" name="d_nif_est"></div>
+      <div class="f" style="margin-bottom:10px"><label class="req">Residência Permanente e País</label><input type="text" name="d_res1" data-req-pt="Residência Rep. Legal" data-req-en="Legal Rep. Residence" placeholder="Morada completa"><span class="f-err">Campo obrigatório</span><input class="xi" name="d_res2" placeholder="País"></div>
+      <div class="f" style="margin-bottom:10px"><label>Residência Fiscal (se diferente) e País</label><input type="text" name="d_resf"><input class="xi" name="d_resf_pais" placeholder="País"></div>
+      <div class="f" style="margin-bottom:10px"><label class="req">Telefone</label><input type="tel" name="d_tel" data-req-pt="Tel. Rep. Legal" data-req-en="Legal Rep. Phone"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f"><label class="req">Email</label><input type="email" name="d_email" data-req-pt="Email Rep. Legal" data-req-en="Legal Rep. Email"><span class="f-err">Campo obrigatório</span></div>
+    </div>
+  </div>
+</div>

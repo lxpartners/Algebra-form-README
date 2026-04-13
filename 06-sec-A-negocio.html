@@ -1,0 +1,44 @@
+<!-- SECÇÃO A — NEGÓCIO -->
+<div class="divider"></div>
+<div class="readonly-section" style="position:relative">
+  <div class="readonly-overlay"></div>
+  <div class="sec-title" id="a-title">Secção A — Negócio</div>
+  <div class="sec-sub" id="a-sub">Descritivo do negócio ou "N/A" onde não aplicável.</div>
+  <div class="card">
+    <div class="clbl">Dados do Negócio</div>
+    <div class="g2">
+      <div class="f s2"><label class="req">Propósito do Negócio</label><input type="text" name="a_proposito" data-req-pt="Propósito do Negócio" data-req-en="Business Purpose" placeholder="Descreva o propósito"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f s2"><label>Descritivo</label><textarea name="a_descritivo" rows="2" placeholder="Descrição detalhada..."></textarea></div>
+      <div class="f"><label class="req">Montante da Operação (€)</label><input type="text" name="a_montante" data-req-pt="Montante da Operação" data-req-en="Operation Amount" placeholder="0,00"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f"><label class="req">Sinal (€)</label><input type="text" name="a_sinal" data-req-pt="Sinal" data-req-en="Signal/Deposit" placeholder="0,00"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f s2">
+        <span class="flbl">Origem dos Fundos <span style="color:var(--err)">*</span></span>
+        <div class="opts" id="fund-opts">
+          <div class="opt" onclick="toggleRad(this,'fund-opts')"><div class="odot"></div>Próprios</div>
+          <div class="opt" onclick="toggleRad(this,'fund-opts')"><div class="odot"></div>Financiamento</div>
+          <div class="opt" onclick="toggleRad(this,'fund-opts')"><div class="odot"></div>Mistos</div>
+        </div>
+      </div>
+      <div class="f"><label>% Financiamento e Banco</label><input type="text" name="a_fin_pct" placeholder="Ex: 80% — Banco XYZ"></div>
+      <div class="f">
+        <span class="flbl">Proveniência dos Fundos Próprios</span>
+        <div class="opts">
+          <div class="opt sq" onclick="toggleChk(this)"><div class="odot"></div>Depósito bancário</div>
+          <div class="opt sq" onclick="toggleChk(this)"><div class="odot"></div>Venda de ativo</div>
+          <div class="opt sq" onclick="toggleChk(this)"><div class="odot"></div>Cert. aforro/tesouro</div>
+          <div class="opt sq" onclick="toggleChkOutro(this,'outro-fundos')"><div class="odot"></div>Outro</div>
+        </div>
+        <div class="outro" id="outro-fundos"><input type="text" name="a_fundos_outro" placeholder="Especifique..."></div>
+      </div>
+      <div class="f s2">
+        <span class="flbl">Meios de Pagamento</span>
+        <div class="opts">
+          <div class="opt sq" onclick="toggleChk(this)"><div class="odot"></div>Cheque bancário / visado</div>
+          <div class="opt sq" onclick="toggleChk(this)"><div class="odot"></div>Transferência bancária</div>
+        </div>
+      </div>
+      <div class="f"><label class="req">Banco e IBAN (cheque)</label><input type="text" name="a_cheque_iban" data-req-pt="Banco e IBAN (cheque)" data-req-en="Bank & IBAN (cheque)" placeholder="PT50 0000 0000 0000 0000 0000 0"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f"><label class="req">IBAN (transferência)</label><input type="text" name="a_transf_iban" data-req-pt="IBAN (transferência)" data-req-en="IBAN (transfer)" placeholder="PT50 0000 0000 0000 0000 0000 0"><span class="f-err">Campo obrigatório</span></div>
+    </div>
+  </div>
+</div>

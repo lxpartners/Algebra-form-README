@@ -1,0 +1,16 @@
+<!-- PDF MODAL -->
+<div id="pdf-modal">
+  <div class="pdf-modal-box">
+    <div class="pdf-modal-hdr">
+      <span id="pdf-preview-label">Pré-visualização do PDF</span>
+      <div class="pdf-modal-btns">
+        <button class="btn-p" style="margin:0;padding:8px 18px" onclick="downloadPDF()">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11V3M5 8l3 3 3-3"/><path d="M2 12v1a1 1 0 001 1h10a1 1 0 001-1v-1"/></svg>
+          <span id="pdf-dl-label">Descarregar PDF</span>
+        </button>
+        <button class="pdf-modal-close" onclick="closePDFModal()">×</button>
+      </div>
+    </div>
+    <div class="pdf-preview-wrap" id="pdf-preview-wrap"></div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<!-- SECÇÃO B — PESSOA COLETIVA -->
+<div id="section-coletiva" style="display:none">
+  <div class="divider"></div>
+  <div class="sec-title" id="cc-title">Secção B — Proponente Coletivo</div>
+  <div class="sec-sub" id="cc-sub">Identificação do Proponente — Pessoa Coletiva.</div>
+  <div class="card">
+    <div class="clbl">Identificação da Empresa</div>
+    <div class="g2">
+      <div class="f s2"><label class="req">Denominação Social</label><input type="text" name="cc_denom" data-req-pt="Denominação Social" data-req-en="Company Name"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f"><label class="req">NIPC</label><input type="text" name="cc_nipc" data-req-pt="NIPC da empresa" data-req-en="Company NIPC"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f"><label class="req">CAEs</label><input type="text" name="cc_cae" data-req-pt="CAE" data-req-en="CAE Code"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f s2"><label class="req">Objeto Social</label><input type="text" name="cc_objeto" data-req-pt="Objeto Social" data-req-en="Corporate Purpose"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f s2"><label class="req">Morada da Sede</label><input type="text" name="cc_sede" data-req-pt="Morada da Sede" data-req-en="Registered Address"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f"><label class="req">Forma Jurídica</label><input type="text" name="cc_forma" data-req-pt="Forma Jurídica" data-req-en="Legal Form" placeholder="Ex: Lda, SA, SPA"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f"><label>Marca (se aplicável)</label><input type="text" name="cc_marca"></div>
+      <div class="f"><label class="req">Data de Constituição</label><input type="date" name="cc_data_const" data-req-pt="Data de Constituição" data-req-en="Incorporation Date"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f"><label class="req">País de Constituição</label><input type="text" name="cc_pais_const" data-req-pt="País de Constituição" data-req-en="Country of Incorporation"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f s2"><label>Sucursais / Agências / Delegações</label><textarea name="cc_sucursais" rows="2" placeholder="N/A se não aplicável"></textarea></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="clbl">Responsável de Contacto</div>
+    <div class="g3">
+      <div class="f s2"><label class="req">Nome Responsável</label><input type="text" name="cc_resp_nome" data-req-pt="Nome do Responsável" data-req-en="Contact Name"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f"><label class="req">Telefone</label><input type="tel" name="cc_resp_tel" data-req-pt="Telefone do Responsável" data-req-en="Contact Phone"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f s2"><label class="req">Email</label><input type="email" name="cc_resp_email" data-req-pt="Email do Responsável" data-req-en="Contact Email"><span class="f-err">Campo obrigatório</span></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="sec-title">Secção C — Titulares</div>
+  <div class="sec-sub">Titulares dos Órgãos de Administração, participações ≥ 5% e Beneficiários Efetivos.</div>
+  <div class="card">
+    <div class="clbl">Registo Central do Beneficiário Efetivo</div>
+    <div class="g2"><div class="f"><label>Código RCBE</label><input type="text" name="cc_rcbe" placeholder="Ex: RCBE-000000"></div></div>
+  </div>
+  <div id="titulares-container"></div>
+  <button class="add-titular-btn" onclick="addTitular()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+    <span id="lbl-add-titular">Adicionar Titular</span>
+  </button>
+</div>

@@ -1,0 +1,46 @@
+<!-- DOCUMENTOS -->
+<div class="divider"></div>
+<div class="sec-title" id="f-title">Documentos Obrigatórios</div>
+<div class="sec-sub" id="f-sub">Carregue cada documento. <span style="color:var(--err)">*</span> Obrigatório para submissão.</div>
+<div id="docs-singular">
+  <div class="card" style="margin-bottom:12px">
+    <div class="clbl">Identificação Fiscal</div>
+    <ul class="cklist">
+      <li id="li-f1"><div class="ck-row"><span class="ck-label">Cópia do(s) documento(s) de identificação de todos os intervenientes <span class="ck-req-star">*</span></span><label class="ck-upbtn" id="upbtn-f1"><input type="file" id="upinput-f1" name="file_f1" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="docFileSet(this,'f1')"></label></div><div class="ck-meta" id="upmeta-f1"><div class="ck-filelist" id="upfiles-f1"></div></div></li>
+      <li id="li-f2"><div class="ck-row"><span class="ck-label">Comprovativo de NIF (se não constar do doc. de identificação) <span class="ck-req-star">*</span></span><label class="ck-upbtn" id="upbtn-f2"><input type="file" id="upinput-f2" name="file_f2" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="docFileSet(this,'f2')"></label></div><div class="ck-meta" id="upmeta-f2"><div class="ck-filelist" id="upfiles-f2"></div></div></li>
+      <li id="li-f3"><div class="ck-row"><span class="ck-label">Procuração <em>(se aplicável)</em></span><label class="ck-upbtn" id="upbtn-f3"><input type="file" id="upinput-f3" name="file_f3" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="docFileSet(this,'f3')"></label></div><div class="ck-meta" id="upmeta-f3"><div class="ck-filelist" id="upfiles-f3"></div></div></li>
+    </ul>
+  </div>
+  <div class="card" style="margin-bottom:12px">
+    <div class="clbl">Residência &amp; Rendimentos</div>
+    <ul class="cklist">
+      <li id="li-f4"><div class="ck-row"><span class="ck-label">Fatura de serviço público com menos de 3 meses (água, luz, telecom., banco) <span class="ck-req-star">*</span></span><label class="ck-upbtn" id="upbtn-f4"><input type="file" id="upinput-f4" name="file_f4" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="docFileSet(this,'f4')"></label></div><div class="ck-meta" id="upmeta-f4"><div class="ck-filelist" id="upfiles-f4"></div></div></li>
+      <li id="li-f5"><div class="ck-row"><span class="ck-label">Recibo de vencimento, cartão de ordem profissional ou declaração de entidade profissional <span class="ck-req-star">*</span></span><label class="ck-upbtn" id="upbtn-f5"><input type="file" id="upinput-f5" name="file_f5" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="docFileSet(this,'f5')"></label></div><div class="ck-meta" id="upmeta-f5"><div class="ck-filelist" id="upfiles-f5"></div></div></li>
+      <li id="li-f6"><div class="ck-row"><span class="ck-label">Comprovativo de IBAN da conta bancária de onde serão transferidos os fundos <span class="ck-req-star">*</span></span><label class="ck-upbtn" id="upbtn-f6"><input type="file" id="upinput-f6" name="file_f6" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="docFileSet(this,'f6')"></label></div><div class="ck-meta" id="upmeta-f6"><div class="ck-filelist" id="upfiles-f6"></div></div></li>
+    </ul>
+  </div>
+</div>
+<div id="docs-coletiva" style="display:none">
+  <div class="card" style="margin-bottom:12px">
+    <div class="clbl">Documentos da Empresa</div>
+    <ul class="cklist">
+      <li id="li-cc1"><div class="ck-row"><span class="ck-label">Certidão do Registo Comercial e RCBE (ou equivalente para entidades estrangeiras) <span class="ck-req-star">*</span></span><label class="ck-upbtn" id="upbtn-cc1"><input type="file" id="upinput-cc1" name="file_cc1" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="docFileSet(this,'cc1')"></label></div><div class="ck-meta" id="upmeta-cc1"><div class="ck-filelist" id="upfiles-cc1"></div></div></li>
+      <li id="li-cc2"><div class="ck-row"><span class="ck-label">Cópia dos documentos de identificação dos Titulares (Administração / ≥5% capital / BE) <span class="ck-req-star">*</span></span><label class="ck-upbtn" id="upbtn-cc2"><input type="file" id="upinput-cc2" name="file_cc2" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="docFileSet(this,'cc2')"></label></div><div class="ck-meta" id="upmeta-cc2"><div class="ck-filelist" id="upfiles-cc2"></div></div></li>
+      <li id="li-cc3"><div class="ck-row"><span class="ck-label">Comprovativo de NIF (se não constar do doc. de identificação)</span><label class="ck-upbtn" id="upbtn-cc3"><input type="file" id="upinput-cc3" name="file_cc3" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="docFileSet(this,'cc3')"></label></div><div class="ck-meta" id="upmeta-cc3"><div class="ck-filelist" id="upfiles-cc3"></div></div></li>
+      <li id="li-cc4"><div class="ck-row"><span class="ck-label">Deliberação da Assembleia Geral / Conselho de Administração ou Procuração <em>(se aplicável)</em></span><label class="ck-upbtn" id="upbtn-cc4"><input type="file" id="upinput-cc4" name="file_cc4" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="docFileSet(this,'cc4')"></label></div><div class="ck-meta" id="upmeta-cc4"><div class="ck-filelist" id="upfiles-cc4"></div></div></li>
+      <li id="li-cc5"><div class="ck-row"><span class="ck-label">Comprovativo de IBAN da conta bancária de onde serão transferidos os fundos <span class="ck-req-star">*</span></span><label class="ck-upbtn" id="upbtn-cc5"><input type="file" id="upinput-cc5" name="file_cc5" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="docFileSet(this,'cc5')"></label></div><div class="ck-meta" id="upmeta-cc5"><div class="ck-filelist" id="upfiles-cc5"></div></div></li>
+    </ul>
+  </div>
+</div>
+<div class="card">
+  <div class="clbl">Comprovativo da Origem de Fundos <span style="color:var(--err);font-weight:400;font-size:8px">— pelo menos 1 obrigatório</span></div>
+  <ul class="cklist">
+    <li id="li-g1"><div class="ck-row"><div class="ck-chk" id="ckchk-g1"></div><span class="ck-label">Escritura / Contrato de compra e venda de ativos</span><label class="ck-upbtn" id="upbtn-g1" style="display:none"><input type="file" id="upinput-g1" name="file_g1" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none"></label></div><div class="ck-meta" id="upmeta-g1"><div class="ck-filelist" id="upfiles-g1"></div><div class="ck-upload-err" id="uperr-g1">Upload obrigatório</div></div></li>
+    <li id="li-g2"><div class="ck-row"><div class="ck-chk" id="ckchk-g2"></div><span class="ck-label">Declaração bancária de titularidade e suficiência de fundos</span><label class="ck-upbtn" id="upbtn-g2" style="display:none"><input type="file" id="upinput-g2" name="file_g2" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none"></label></div><div class="ck-meta" id="upmeta-g2"><div class="ck-filelist" id="upfiles-g2"></div><div class="ck-upload-err" id="uperr-g2">Upload obrigatório</div></div></li>
+    <li id="li-g3"><div class="ck-row"><div class="ck-chk" id="ckchk-g3"></div><span class="ck-label">Extrato bancário</span><label class="ck-upbtn" id="upbtn-g3" style="display:none"><input type="file" id="upinput-g3" name="file_g3" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none"></label></div><div class="ck-meta" id="upmeta-g3"><div class="ck-filelist" id="upfiles-g3"></div><div class="ck-upload-err" id="uperr-g3">Upload obrigatório</div></div></li>
+    <li id="li-g4"><div class="ck-row"><div class="ck-chk" id="ckchk-g4"></div><span class="ck-label">Recibos de vencimento / Declaração de IRS</span><label class="ck-upbtn" id="upbtn-g4" style="display:none"><input type="file" id="upinput-g4" name="file_g4" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none"></label></div><div class="ck-meta" id="upmeta-g4"><div class="ck-filelist" id="upfiles-g4"></div><div class="ck-upload-err" id="uperr-g4">Upload obrigatório</div></div></li>
+    <li id="li-g5"><div class="ck-row"><div class="ck-chk" id="ckchk-g5"></div><span class="ck-label">Relatórios de contas</span><label class="ck-upbtn" id="upbtn-g5" style="display:none"><input type="file" id="upinput-g5" name="file_g5" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none"></label></div><div class="ck-meta" id="upmeta-g5"><div class="ck-filelist" id="upfiles-g5"></div><div class="ck-upload-err" id="uperr-g5">Upload obrigatório</div></div></li>
+    <li id="li-g6"><div class="ck-row"><div class="ck-chk" id="ckchk-g6"></div><span class="ck-label">Outro <em>(conforme a origem dos fundos)</em></span><label class="ck-upbtn" id="upbtn-g6" style="display:none"><input type="file" id="upinput-g6" name="file_g6" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none"></label></div><div class="ck-meta" id="upmeta-g6"><div class="ck-filelist" id="upfiles-g6"></div><div class="ck-upload-err" id="uperr-g6">Upload obrigatório</div></div></li>
+  </ul>
+  <div id="uperr-fundos" style="display:none;font-size:9px;color:var(--err);margin-top:12px;padding-top:10px;border-top:1px solid #e0e0e0">↑ Pelo menos um comprovativo de origem de fundos é obrigatório</div>
+</div>

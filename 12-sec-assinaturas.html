@@ -1,0 +1,82 @@
+<!-- PROTEÇÃO DE DADOS & ASSINATURAS -->
+<div class="divider"></div>
+<div class="sec-title" id="h-title">Proteção de Dados &amp; Declarações</div>
+<div class="sec-sub" id="h-sub">Por favor, leia atentamente antes de assinar.</div>
+<div class="gdpr-box">
+  <button class="gdpr-toggle" onclick="toggleGdpr()">
+    <strong id="h-gdpr-title">Proteção de Dados Pessoais — RGPD</strong>
+    <svg class="gdpr-chevron" id="gdpr-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 6 8 10 12 6"/></svg>
+  </button>
+  <div class="gdpr-body" id="gdpr-body">
+    <p style="margin-top:12px">Nos termos do Regulamento (UE) 2016/679 ("RGPD"), da Lei n.º 58/2019 de 08 de agosto e da Lei n.º 83/2017 de 18 de agosto, a ALGEBRA CAPITAL, LDA. (NIPC 513912878, Av. da Liberdade, 110, 5.º, Lisboa) declara que os dados pessoais neste formulário são recolhidos, tratados e conservados estritamente para o cumprimento do dever de identificação e diligência previsto na Lei n.º 83/2017.</p>
+    <p style="margin-top:8px">Os dados serão conservados pelo prazo legalmente exigido. Os direitos de acesso, retificação, atualização, apagamento, limitação e oposição poderão ser exercidos para: <strong style="color:#111">dataprotection@algebracapital.pt</strong></p>
+  </div>
+</div>
+<div class="ibox">
+  <strong id="h-decl-title">Declarações do(s) Proponente(s)</strong>
+  <div style="margin-top:8px;font-size:11px;color:#555;line-height:1.8;font-weight:300">
+    O(s) abaixo-assinado(s) declara(m), sob sua responsabilidade, que: (i) os dados incluídos neste formulário e nos documentos fornecidos estão corretos e em vigor na data de assinatura; (ii) consente(m) no tratamento dos dados para a exclusiva finalidade do contrato ou transação a que se destinam; (iii) compromete(m)-se a informar a ALGEBRA das alterações que tenham relevância no cumprimento das obrigações legais; (iv) declara(m) disponibilidade para responder a pedidos de elementos complementares necessários ao cumprimento dos deveres de AML/CFT.
+  </div>
+</div>
+<div class="card">
+  <div class="clbl">Assinaturas</div>
+  <div class="ibox" style="margin-bottom:18px">
+    <strong id="h-how-title">Como assinar</strong>
+    <span id="h-how-text">Opção A — Exporte o formulário pré-preenchido em PDF, assine fisicamente e faça upload. Opção B — Autentique digitalmente com Chave Móvel Digital.</span>
+  </div>
+  <div style="display:flex;gap:10px;margin-bottom:20px">
+    <button class="btn-exp" style="flex:1" onclick="runExport(false)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M8 12l4 4 4-4"/><rect x="3" y="18" width="18" height="3" rx="1"/></svg>
+      <span id="h-export-btn">Exportar formulário pré-preenchido (PDF)</span>
+    </button>
+    <button class="btn-exp" style="flex:1" onclick="openDraftPDF()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+      <span id="h-export-skip">Exportar sem validação (rascunho)</span>
+    </button>
+  </div>
+  <div class="sgrid">
+    <div>
+      <div style="font-size:8px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#888;margin-bottom:14px" id="h-p1-lbl">Proponente 1</div>
+      <div class="f" style="margin-bottom:12px"><label class="req">Nome</label><input type="text" id="h1_nome" name="h1_nome" data-req-pt="Assinatura — Nome Proponente 1" data-req-en="Signature — Proposer 1"><span class="f-err">Campo obrigatório</span></div>
+      <div class="f" style="margin-bottom:12px"><label>Local</label><input type="text" name="h1_local"></div>
+      <div class="f" style="margin-bottom:12px"><label class="req">Data</label><input type="date" name="h1_data" data-req-pt="Data Assinatura P1" data-req-en="Signature Date P1"><span class="f-err">Campo obrigatório</span></div>
+      <button class="cmd-btn" id="cmd-btn-1" onclick="openCmd(1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>
+        <span id="cmd-label-1">Autenticar com Chave Móvel Digital</span>
+      </button>
+      <div class="cmd-st" id="cmd-status-1"></div>
+      <div style="margin-top:16px">
+        <div style="font-size:9px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#555;margin-bottom:6px">Upload de assinatura física</div>
+        <div class="upload-area" id="upload-area-1" onclick="document.getElementById('upload-1').click()">
+          <input type="file" id="upload-1" name="file_sign_1" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="handleUpload(this,1)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;color:#aaa;display:block;margin:0 auto 8px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <p style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#888">Clique para fazer upload do documento assinado</p>
+          <p style="font-size:9px;color:#aaa;margin-top:4px">PDF, JPG ou PNG</p>
+        </div>
+        <div class="upload-name" id="upload-name-1" style="font-size:11px;color:var(--ok);margin-top:6px;text-align:center;display:none"></div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:8px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#888;margin-bottom:14px" id="h-p2-lbl">Proponente 2 / Representante Legal</div>
+      <div class="f" style="margin-bottom:12px"><label>Nome</label><input type="text" id="h2_nome" name="h2_nome"></div>
+      <div class="f" style="margin-bottom:12px"><label>Local</label><input type="text" name="h2_local"></div>
+      <div class="f" style="margin-bottom:12px"><label>Data</label><input type="date" name="h2_data"></div>
+      <button class="cmd-btn" id="cmd-btn-2" onclick="openCmd(2)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>
+        <span id="cmd-label-2">Autenticar com Chave Móvel Digital</span>
+      </button>
+      <div class="cmd-st" id="cmd-status-2"></div>
+      <div style="margin-top:16px">
+        <div style="font-size:9px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#555;margin-bottom:6px">Upload de assinatura física</div>
+        <div class="upload-area" id="upload-area-2" onclick="document.getElementById('upload-2').click()">
+          <input type="file" id="upload-2" name="file_sign_2" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="handleUpload(this,2)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;color:#aaa;display:block;margin:0 auto 8px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <p style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#888">Clique para fazer upload do documento assinado</p>
+          <p style="font-size:9px;color:#aaa;margin-top:4px">PDF, JPG ou PNG</p>
+        </div>
+        <div class="upload-name" id="upload-name-2" style="font-size:11px;color:var(--ok);margin-top:6px;text-align:center;display:none"></div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:9px;color:#aaa;margin-top:16px">(*) Assinatura(s) conforme documento de identificação.</p>
+</div>

@@ -1,0 +1,121 @@
+@* ============================================================
+   _KycForm.cshtml — Partial View KYC · Algebra Capital, LDA
+   NIPC 513912878
+
+   USO NA VIEW MÃE:
+       @await Html.PartialAsync("_KycForm", new KycFormModel {
+           ClientId  = Model.ClientId,
+           RefInterna = Model.KycRef
+       })
+
+   WWWROOT — referenciar no _Layout.cshtml ou na view mãe:
+       @section Styles  { <link rel="stylesheet" href="~/css/kyc.css" /> }
+       @section Scripts { <script src="~/js/kyc.js"></script> }
+   ============================================================ *@
+
+@model KycFormModel
+@using Microsoft.AspNetCore.Antiforgery
+
+@* ── DEPENDÊNCIAS (manter aqui ou mover para _Layout.cshtml) ── *@
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+@* ── CSS — em produção usar: <link rel="stylesheet" href="~/css/kyc.css" /> ── *@
+<link rel="stylesheet" href="~/css/kyc.css" />
+
+@* ══════════════════════════════════════════════════════════════
+   CAMPOS OCULTOS RAZOR — injectados pelo Controller
+   razor/_RazorFields.cshtml
+   ══════════════════════════════════════════════════════════════ *@
+@* INCLUDE: razor/_RazorFields.cshtml *@
+
+@* ══════════════════════════════════════════════════════════════
+   MODAL — Pré-visualização PDF
+   sections/01-modal-pdf.html
+   ══════════════════════════════════════════════════════════════ *@
+@* INCLUDE: sections/01-modal-pdf.html *@
+
+@* ══════════════════════════════════════════════════════════════
+   BANNER — Modo Interno / Modo Cliente
+   sections/02-modo-banner.html
+   ══════════════════════════════════════════════════════════════ *@
+@* INCLUDE: sections/02-modo-banner.html *@
+
+@* ══════════════════════════════════════════════════════════════
+   TOAST — Validação de campos obrigatórios
+   sections/03-toast.html
+   ══════════════════════════════════════════════════════════════ *@
+@* INCLUDE: sections/03-toast.html *@
+
+@* ══════════════════════════════════════════════════════════════
+   PROGRESSO — Barra e steps
+   sections/04-progress.html
+   ══════════════════════════════════════════════════════════════ *@
+@* INCLUDE: sections/04-progress.html *@
+
+<div class="wrap">
+
+    @* ══════════════════════════════════════════════════════════
+       CAPA + REFERÊNCIA INTERNA (só Modo Interno)
+       sections/05-cover-ref.html
+       ══════════════════════════════════════════════════════════ *@
+    @* INCLUDE: sections/05-cover-ref.html *@
+
+    @* ══════════════════════════════════════════════════════════
+       A — NEGÓCIO (readonly para cliente)
+       sections/06-sec-A-negocio.html
+       ══════════════════════════════════════════════════════════ *@
+    @* INCLUDE: sections/06-sec-A-negocio.html *@
+
+    @* ══════════════════════════════════════════════════════════
+       B — PROPONENTE PESSOA SINGULAR
+       sections/07-sec-B-singular.html
+       ══════════════════════════════════════════════════════════ *@
+    @* INCLUDE: sections/07-sec-B-singular.html *@
+
+    @* ══════════════════════════════════════════════════════════
+       B — PROPONENTE PESSOA COLETIVA + SECÇÃO C TITULARES
+       sections/08-sec-B-coletiva.html
+       ══════════════════════════════════════════════════════════ *@
+    @* INCLUDE: sections/08-sec-B-coletiva.html *@
+
+    @* ══════════════════════════════════════════════════════════
+       REPRESENTANTE LEGAL
+       sections/09-sec-rep-legal.html
+       ══════════════════════════════════════════════════════════ *@
+    @* INCLUDE: sections/09-sec-rep-legal.html *@
+
+    @* ══════════════════════════════════════════════════════════
+       PEP — Pessoa Politicamente Exposta
+       sections/10-sec-pep.html
+       ══════════════════════════════════════════════════════════ *@
+    @* INCLUDE: sections/10-sec-pep.html *@
+
+    @* ══════════════════════════════════════════════════════════
+       DOCUMENTOS OBRIGATÓRIOS + ORIGEM DE FUNDOS
+       sections/11-sec-documentos.html
+       ══════════════════════════════════════════════════════════ *@
+    @* INCLUDE: sections/11-sec-documentos.html *@
+
+    @* ══════════════════════════════════════════════════════════
+       PROTEÇÃO DE DADOS, DECLARAÇÕES & ASSINATURAS
+       sections/12-sec-assinaturas.html
+       ══════════════════════════════════════════════════════════ *@
+    @* INCLUDE: sections/12-sec-assinaturas.html *@
+
+    @* ══════════════════════════════════════════════════════════
+       ANEXO I — DEFINIÇÕES LEGAIS
+       sections/13-sec-anexo-legal.html
+       ══════════════════════════════════════════════════════════ *@
+    @* INCLUDE: sections/13-sec-anexo-legal.html *@
+
+</div>@* /wrap *@
+
+@* ══════════════════════════════════════════════════════════════
+   BARRA DE AÇÕES (bottom bar fixo)
+   sections/14-bottom-bar.html
+   ══════════════════════════════════════════════════════════════ *@
+@* INCLUDE: sections/14-bottom-bar.html *@
+
+@* ── JAVASCRIPT — em produção usar: <script src="~/js/kyc.js"></script> ── *@
+<script src="~/js/kyc.js"></script>
